@@ -91,6 +91,11 @@
   .steps li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:-1px;width:26px;height:26px;border-radius:50%;background:var(--water);color:var(--sand);font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif}
   .steps li:not(:last-child)::after{content:"";position:absolute;left:13px;top:26px;bottom:2px;width:1.5px;background:var(--line)}
   .knot-svg{width:100%;height:90px;margin:6px 0 2px}
+  .knot-strip{display:flex;gap:10px;overflow-x:auto;padding:2px 2px 8px;margin:0 -2px 6px;-webkit-overflow-scrolling:touch}
+  .kf{flex:0 0 144px;background:#FBFAF6;border:1px solid var(--line);border-radius:12px;padding:8px;position:relative}
+  .kf-svg{width:100%;height:auto;display:block}
+  .kf-num{position:absolute;top:7px;left:7px;width:21px;height:21px;border-radius:50%;background:var(--water);color:var(--sand);font-size:.72rem;font-weight:700;font-family:Georgia,serif;display:flex;align-items:center;justify-content:center;z-index:2}
+  .kf-cap{font-size:.73rem;color:var(--ink-soft);text-align:center;margin-top:5px;line-height:1.25;font-weight:600}
   .best-for{font-size:.84rem;background:#FBF6EA;border-radius:8px;padding:8px 10px;margin-top:10px}
   /* gear */
   .gear-card h3{margin:0 0 2px;font-size:1.1rem;display:flex;align-items:center;gap:8px}
@@ -656,12 +661,48 @@ function renderRigs(){
 }
 
 /* ============================ KNOTS ============================ */
-function knotSvg(){
-  return `<svg class="knot-svg" viewBox="0 0 300 90" preserveAspectRatio="xMidYMid meet">
-    <path d="M10 45 C 70 45, 90 20, 130 45 C 160 65, 175 25, 205 45" fill="none" stroke="#C8881E" stroke-width="3.5" stroke-linecap="round"/>
-    <circle cx="240" cy="45" r="14" fill="none" stroke="#1C5E57" stroke-width="4"/>
-    <path d="M205 45 C 215 45, 225 45, 226 45" fill="none" stroke="#C8881E" stroke-width="3.5"/>
-    <path d="M254 38 l16 -8 v 30 l-16 -8" fill="#1C5E57" opacity=".5"/></svg>`;
+/* ---- knot step illustrations ---- */
+const KEYE='<circle cx="34" cy="60" r="9" fill="none" stroke="#1C5E57" stroke-width="4"/>';
+function kln(d,w){ return `<path d="${d}" fill="none" stroke="#C8881E" stroke-width="${w||5}" stroke-linecap="round"/>`; }
+function kov(d,w){ w=w||5; return `<path d="${d}" fill="none" stroke="#FBFAF6" stroke-width="${w+5}"/><path d="${d}" fill="none" stroke="#C8881E" stroke-width="${w}" stroke-linecap="round"/>`; }
+function ktag(x,y){ return `<circle cx="${x}" cy="${y}" r="3.6" fill="#E0623B"/>`; }
+function kw(x0,x1,y,n){ const w=(x1-x0)/n; let s=""; for(let i=0;i<n;i++){ const x=x0+i*w+w*0.15; s+=`<line x1="${x.toFixed(1)}" y1="${y+10}" x2="${(x+w*0.7).toFixed(1)}" y2="${y-10}" stroke="#C8881E" stroke-width="4" stroke-linecap="round"/>`; } return s; }
+function kwv(y0,y1,x,n){ const h=(y1-y0)/n; let s=""; for(let i=0;i<n;i++){ const y=y0+i*h+h*0.15; s+=`<line x1="${x-11}" y1="${(y+h*0.7).toFixed(1)}" x2="${x+11}" y2="${y.toFixed(1)}" stroke="#C8881E" stroke-width="4" stroke-linecap="round"/>`; } return s; }
+function karr(x1,y1,x2,y2){ const a=Math.atan2(y2-y1,x2-x1)+Math.PI,h=7; return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#E0623B" stroke-width="2.5" stroke-linecap="round"/><line x1="${x2}" y1="${y2}" x2="${(x2+h*Math.cos(a+0.5)).toFixed(1)}" y2="${(y2+h*Math.sin(a+0.5)).toFixed(1)}" stroke="#E0623B" stroke-width="2.5" stroke-linecap="round"/><line x1="${x2}" y1="${y2}" x2="${(x2+h*Math.cos(a-0.5)).toFixed(1)}" y2="${(y2+h*Math.sin(a-0.5)).toFixed(1)}" stroke="#E0623B" stroke-width="2.5" stroke-linecap="round"/>`; }
+function khookV(){ return '<circle cx="60" cy="22" r="8" fill="none" stroke="#1C5E57" stroke-width="4"/>'+kln("M60 30 L60 86",5)+'<path d="M60 86 Q 60 104 44 104 Q 33 104 35 93" fill="none" stroke="#C8881E" stroke-width="5" stroke-linecap="round"/>'; }
+
+const KNOT_DIAGRAMS={
+  palomar:[
+    ["Push a doubled loop through the eye", ()=> KEYE + kln("M150 50 L24 50 Q10 50 10 60 Q10 70 24 70 L150 70") + ktag(150,50) + karr(96,34,56,34)],
+    ["Tie a loose overhand knot", ()=> KEYE + kln("M44 56 H72") + kln("M44 64 H72") + kln("M72 60 C 82 30, 130 32, 122 66 C 118 84, 86 84, 94 60") + kov("M94 60 L126 82") + ktag(150,80)+kln("M126 82 L150 80")],
+    ["Pass the hook up through the loop", ()=> KEYE + kln("M44 60 H74") + kln("M74 60 C 84 34, 126 34, 118 64 C 114 80, 88 80, 94 60") + karr(104,96,104,50) + '<path d="M104 100 q15 0 15 -15" fill="none" stroke="#1C5E57" stroke-width="3.5"/>'],
+    ["Pull tight and trim", ()=> KEYE + kln("M150 60 L54 60") + '<rect x="44" y="51" width="20" height="18" rx="6" fill="#C8881E"/>' + ktag(150,60)]
+  ],
+  clinch:[
+    ["Thread the eye, leave a tail", ()=> KEYE + kln("M150 62 L24 62 Q12 62 16 51 L72 47") + ktag(72,47)],
+    ["Wrap the tag 5–7× around the line", ()=> KEYE + kln("M150 60 L40 60") + kw(58,132,60,6) + ktag(134,49)],
+    ["Tuck it back through by the eye", ()=> KEYE + kln("M150 60 L40 60") + kw(64,124,60,5) + '<path d="M44 60 Q 30 48 46 45" fill="none" stroke="#C8881E" stroke-width="4"/>' + karr(122,45,50,45)],
+    ["Wet and cinch tight", ()=> KEYE + kln("M150 60 L56 60") + '<rect x="46" y="51" width="22" height="18" rx="6" fill="#C8881E"/>' + ktag(150,60)]
+  ],
+  uni:[
+    ["Through the eye, double back parallel", ()=> KEYE + kln("M150 54 L40 54 Q22 54 22 62 Q22 70 40 70 L120 70") + ktag(120,70)],
+    ["Wrap the tag through the loop 5–6×", ()=> KEYE + kln("M150 54 L40 54 Q22 54 22 62 Q22 70 40 70 L118 70") + kw(56,118,62,6) + ktag(120,70)],
+    ["Snug to a barrel, slide to the eye", ()=> KEYE + kln("M150 60 L62 60") + '<rect x="50" y="49" width="24" height="22" rx="7" fill="#C8881E"/>' + ktag(150,60)]
+  ],
+  loop:[
+    ["Loose overhand, tag down to the eye", ()=> KEYE + kln("M150 60 L96 60") + '<ellipse cx="86" cy="60" rx="13" ry="15" fill="none" stroke="#C8881E" stroke-width="4"/>' + kln("M76 66 L44 62") + ktag(44,62)],
+    ["Wrap 4–5×, back through the overhand", ()=> KEYE + kln("M150 60 L100 60") + '<ellipse cx="90" cy="60" rx="13" ry="15" fill="none" stroke="#C8881E" stroke-width="4"/>' + kw(44,78,60,4) + karr(58,42,86,52)],
+    ["Tighten — it leaves an open loop", ()=> '<ellipse cx="32" cy="60" rx="20" ry="14" fill="none" stroke="#C8881E" stroke-width="4.5"/>' + '<rect x="58" y="51" width="16" height="18" rx="5" fill="#C8881E"/>' + kln("M74 60 L150 60") + ktag(150,60)]
+  ],
+  snell:[
+    ["Run the line through the eye, loop down the shank", ()=> khookV() + kln("M150 22 L72 22") + kln("M70 26 Q 82 36 78 48 L78 80 Q 78 90 62 90") + ktag(150,22)],
+    ["Wrap the tag around shank & line 6–8×", ()=> khookV() + kln("M150 22 L72 22") + kwv(40,84,60,7) + ktag(150,22)],
+    ["Pull tight against the shank", ()=> khookV() + '<rect x="49" y="40" width="22" height="42" rx="8" fill="#C8881E"/>' + kln("M150 26 L70 26") + ktag(150,26)]
+  ]
+};
+function knotStrip(id){
+  const fr=KNOT_DIAGRAMS[id]; if(!fr) return "";
+  return `<div class="knot-strip">`+fr.map((f,i)=>`<div class="kf"><div class="kf-num">${i+1}</div><svg class="kf-svg" viewBox="0 0 160 120">${f[1]()}</svg><div class="kf-cap">${f[0]}</div></div>`).join("")+`</div>`;
 }
 function renderKnots(){
   document.getElementById("knotList").innerHTML=KNOTS.map(k=>`
@@ -669,7 +710,7 @@ function renderKnots(){
       <div class="fish-head"><div style="flex:1;min-width:0"><h3>${k.name}</h3>
         <div class="knot-meta">Strength <span class="stars">${"●".repeat(k.stars)}${"○".repeat(5-k.stars)}</span></div></div>
         <svg class="chev" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
-      <div class="fish-body">${knotSvg()}
+      <div class="fish-body">${knotStrip(k.id)}
         <div class="best-for"><strong>Use it for:</strong> ${k.for}</div>
         <ol class="steps">${k.steps.map(s=>`<li>${s}</li>`).join("")}</ol></div></div>`).join("");
   document.querySelectorAll("#knotList .fish-card").forEach(c=>{ c.querySelector(".fish-head").onclick=()=>c.classList.toggle("open"); });
@@ -981,7 +1022,7 @@ async function loadWeather(force){
 
 document.getElementById("footnote").textContent = (Store.persistent
   ? "Your catch log and photos are saved on this device."
-  : "Preview mode: catches save for this session. Once installed on your phone, they'll save permanently.") + "  ·  v7";
+  : "Preview mode: catches save for this session. Once installed on your phone, they'll save permanently.") + "  ·  v8";
 </script>
 </body>
 </html>
