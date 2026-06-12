@@ -848,6 +848,9 @@ bindChips(document.getElementById("q-sky"),v=>sel.sky=v);
 document.getElementById("recBtn").onclick=recommend;
 renderFish(); renderRigs(); renderKnots(); renderGear(); renderLog();
 loadWeather();
+document.addEventListener("visibilitychange",()=>{ if(!document.hidden) loadWeather(true); });
+window.addEventListener("pageshow",()=>loadWeather(true));
+window.addEventListener("online",()=>loadWeather(true));
 
 document.getElementById("addCatchBtn").onclick=openSheet;
 document.getElementById("saveCatch").onclick=saveCatch;
@@ -991,8 +994,10 @@ function renderForecast(data){
   }
   el.innerHTML=`<div class="card fc-card"><div class="fc-title">7-day bite outlook</div>${rows}</div>`;
 }
+let wxTries=0;
 async function loadWeather(force){
   const card=document.getElementById("wxCard"); if(!card) return;
+  if(force) wxTries=0;
   let cached=null; try{ cached=JSON.parse(Store.get("gc_weather")||"null"); }catch(e){}
   if(cached&&cached.data){ try{ renderWx(cached.data,true); }catch(e){} }
   const url=`https://api.open-meteo.com/v1/forecast?latitude=${LG.lat}&longitude=${LG.lon}`+
@@ -1012,17 +1017,20 @@ async function loadWeather(force){
   try{
     let data;
     try{ data=await fetchOnce(12000); }
-    catch(e1){ data=await fetchOnce(15000); }   // one automatic, more patient retry
+    catch(e1){ data=await fetchOnce(14000); }
+    wxTries=0;
     renderWx(data,false);
     try{ Store.set("gc_weather",JSON.stringify({data,at:Date.now()})); }catch(e){}
   }catch(e){
-    if(!(cached&&cached.data)) wxError((e&&/timed out/i.test(e.message||""))?"slow connection, tap to retry":((e&&e.message)||"connection error"));
+    wxTries++;
+    if(wxTries<6){ setTimeout(()=>loadWeather(false), 3000); }   // keep retrying — cold launches need a warm-up
+    else if(!(cached&&cached.data)){ wxError("couldn't connect — tap to retry"); }
   }
 }
 
 document.getElementById("footnote").textContent = (Store.persistent
   ? "Your catch log and photos are saved on this device."
-  : "Preview mode: catches save for this session. Once installed on your phone, they'll save permanently.") + "  ·  v8";
+  : "Preview mode: catches save for this session. Once installed on your phone, they'll save permanently.") + "  ·  v9";
 </script>
 </body>
 </html>
