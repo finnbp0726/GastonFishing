@@ -9,88 +9,47 @@
 <meta name="apple-mobile-web-app-title" content="Gaston Cast">
 <meta name="theme-color" content="#0E3A3A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230E3A3A'/%3E%3Cpath d='M28 50c8-13 26-13 34 0-8 13-26 13-34 0z' fill='%23C8881E'/%3E%3Ccircle cx='38' cy='47' r='3' fill='%230E3A3A'/%3E%3Cpath d='M62 50l14-9v18z' fill='%23C8881E'/%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230E3A3A'/%3E%3Cpath d='M28 50c8-13 26-13 34 0-8 13-26 13-34 0z' fill='%23C8881E'/%3E%3Ccircle cx='38' cy='47' r='3' fill='%230E3A3A'/%3E%3Cpath d='M62 50l14-9v18z' fill='%23C8881E'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
   :root{
-    --water:#0E3A3A;        /* deep pine-teal */
-    --water-2:#1C5E57;      /* mid lake green */
-    --sand:#F3EDE0;         /* parchment bg */
-    --sand-2:#EAE2D1;       /* card edge */
-    --brass:#C8881E;        /* tackle brass */
-    --coral:#E0623B;        /* sunrise / catch */
-    --ink:#1E2622;          /* text */
-    --ink-soft:#5A675F;     /* muted text */
-    --line:#D8CFBC;
-    --good:#3E7D58;
-    --shadow:0 2px 10px rgba(14,58,58,.10);
+    --water:#0E3A3A; --water-2:#1C5E57; --sand:#F3EDE0; --sand-2:#EAE2D1;
+    --brass:#C8881E; --coral:#E0623B; --ink:#1E2622; --ink-soft:#5A675F;
+    --line:#D8CFBC; --good:#3E7D58; --shadow:0 2px 10px rgba(14,58,58,.10);
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html,body{margin:0;padding:0}
   body{
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background:var(--sand);
-    color:var(--ink);
-    line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-    padding-bottom:calc(76px + env(safe-area-inset-bottom));
+    background:var(--sand);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;
+    padding-bottom:calc(74px + env(safe-area-inset-bottom));
   }
   h1,h2,h3,.display{font-family:Georgia,"Iowan Old Style","Times New Roman",serif}
-
-  /* ---- top bar ---- */
-  header{
-    position:sticky;top:0;z-index:40;
-    background:var(--water);
-    color:var(--sand);
-    padding:calc(env(safe-area-inset-top) + 14px) 18px 14px;
-    box-shadow:0 2px 12px rgba(0,0,0,.18);
-  }
+  header{position:sticky;top:0;z-index:40;background:var(--water);color:var(--sand);
+    padding:calc(env(safe-area-inset-top) + 14px) 18px 14px;box-shadow:0 2px 12px rgba(0,0,0,.18)}
   .brand{display:flex;align-items:center;gap:10px}
   .brand svg{width:30px;height:30px;flex:0 0 auto}
   .brand .name{font-family:Georgia,serif;font-size:1.28rem;font-weight:700;letter-spacing:.3px}
   .brand .sub{font-size:.72rem;color:#A9C7BF;letter-spacing:1.5px;text-transform:uppercase;margin-top:1px}
-
   main{max-width:560px;margin:0 auto;padding:18px 16px 8px}
   .view{display:none;animation:fade .25s ease}
   .view.active{display:block}
   @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-
   .eyebrow{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--brass);font-weight:700;margin:2px 0 6px}
   h2.section{font-size:1.5rem;margin:0 0 4px}
   .lede{color:var(--ink-soft);font-size:.92rem;margin:0 0 18px}
-
-  .card{
-    background:#fff;border:1px solid var(--line);border-radius:16px;
-    padding:16px;margin-bottom:14px;box-shadow:var(--shadow);
-  }
-  .card.tight{padding:14px}
-
-  /* ---- Today: conditions ---- */
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
   .field{margin-bottom:12px}
   .field label{display:block;font-size:.78rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
   .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{
-    border:1.5px solid var(--line);background:#fff;color:var(--ink);
-    padding:8px 12px;border-radius:999px;font-size:.86rem;font-weight:600;cursor:pointer;
-    transition:.15s;
-  }
+  .chip{border:1.5px solid var(--line);background:#fff;color:var(--ink);padding:8px 12px;border-radius:999px;font-size:.86rem;font-weight:600;cursor:pointer;transition:.15s}
   .chip:active{transform:scale(.96)}
   .chip.on{background:var(--water);color:var(--sand);border-color:var(--water)}
-  select,input,textarea{
-    width:100%;font:inherit;padding:11px 12px;border:1.5px solid var(--line);
-    border-radius:10px;background:#fff;color:var(--ink);
-  }
+  select,input,textarea{width:100%;font:inherit;padding:11px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
   select:focus,input:focus,textarea:focus{outline:none;border-color:var(--brass)}
-
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;
-    background:var(--brass);color:#fff;border:none;border-radius:12px;
-    padding:14px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;
-  }
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--brass);color:#fff;border:none;border-radius:12px;padding:14px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit}
   .btn:active{filter:brightness(.94)}
   .btn.ghost{background:#fff;color:var(--water);border:1.5px solid var(--line)}
   .btn.coral{background:var(--coral)}
-
-  /* recommendation result */
   .rec-target{display:flex;align-items:center;gap:12px;margin-bottom:10px}
   .rec-target .fishicon{width:40px;height:40px;flex:0 0 auto}
   .rec-target h3{margin:0;font-size:1.25rem}
@@ -100,9 +59,6 @@
   .rec-tip{background:#FBF6EA;border-left:3px solid var(--brass);padding:10px 12px;border-radius:0 8px 8px 0;font-size:.88rem;margin-top:8px}
   .rank2{opacity:.95}
   .divider-mini{height:1px;background:var(--line);margin:14px 0}
-
-  /* ---- Fish list ---- */
-  .fish-card{cursor:pointer}
   .fish-head{display:flex;align-items:center;gap:12px}
   .fish-head .fishicon{width:46px;height:46px;flex:0 0 auto}
   .fish-head h3{margin:0;font-size:1.15rem}
@@ -126,24 +82,17 @@
   .s-hot{background:var(--good);color:#fff;border-color:var(--good)}
   .s-ok{background:#EAF2EC;color:var(--good)}
   .s-slow{background:#F1ECE0;color:var(--ink-soft)}
-
-  /* ---- Knots ---- */
-  .knot-card .fish-head h3{font-size:1.1rem}
+  .seerig{margin-top:8px;font-size:.84rem;font-weight:700;color:var(--water);background:#EDF3F1;border:1px solid #cfe0da;border-radius:10px;padding:9px 12px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+  /* knots */
   .knot-meta{font-size:.78rem;color:var(--ink-soft)}
   .stars{color:var(--brass);letter-spacing:1px;font-size:.82rem}
   .steps{counter-reset:step;list-style:none;margin:12px 0 0;padding:0}
   .steps li{position:relative;padding:0 0 12px 38px;font-size:.9rem}
-  .steps li::before{
-    counter-increment:step;content:counter(step);
-    position:absolute;left:0;top:-1px;width:26px;height:26px;border-radius:50%;
-    background:var(--water);color:var(--sand);font-weight:700;font-size:.85rem;
-    display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;
-  }
+  .steps li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:-1px;width:26px;height:26px;border-radius:50%;background:var(--water);color:var(--sand);font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif}
   .steps li:not(:last-child)::after{content:"";position:absolute;left:13px;top:26px;bottom:2px;width:1.5px;background:var(--line)}
   .knot-svg{width:100%;height:90px;margin:6px 0 2px}
   .best-for{font-size:.84rem;background:#FBF6EA;border-radius:8px;padding:8px 10px;margin-top:10px}
-
-  /* ---- Gear ---- */
+  /* gear */
   .gear-card h3{margin:0 0 2px;font-size:1.1rem;display:flex;align-items:center;gap:8px}
   .gear-card .for{font-size:.78rem;color:var(--ink-soft);margin-bottom:10px}
   .spec{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:.88rem}
@@ -152,8 +101,15 @@
   .spec .v{text-align:right;font-weight:600}
   .kidnote{background:#FBEFE4;border-radius:10px;padding:12px;font-size:.88rem;margin-top:2px}
   .kidnote strong{color:var(--coral)}
-
-  /* ---- Log ---- */
+  /* rigs */
+  .group-label{font-family:Georgia,serif;font-size:1.05rem;font-weight:700;margin:6px 0 10px;color:var(--water);display:flex;align-items:center;gap:8px}
+  .group-label::after{content:"";flex:1;height:1px;background:var(--line)}
+  .rig-card{padding:14px 16px 16px}
+  .rig-card h3{margin:0 0 2px;font-size:1.08rem}
+  .rig-card .use{font-size:.84rem;color:var(--ink-soft);margin:0 0 8px}
+  .rig-svg{width:100%;background:#FBFAF6;border:1px solid var(--line);border-radius:12px;display:block}
+  .rig-tip{font-size:.82rem;background:#FBF6EA;border-left:3px solid var(--brass);padding:8px 11px;border-radius:0 8px 8px 0;margin-top:10px}
+  /* log */
   .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
   .stat{background:var(--water);color:var(--sand);border-radius:14px;padding:14px 10px;text-align:center}
   .stat .num{font-family:Georgia,serif;font-size:1.5rem;font-weight:700;line-height:1}
@@ -161,6 +117,7 @@
   .catch{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
   .catch:last-child{border-bottom:none}
   .catch .ci{width:38px;height:38px;flex:0 0 auto;margin-top:2px}
+  .catch .thumb{width:52px;height:52px;border-radius:10px;object-fit:cover;flex:0 0 auto;margin-top:2px;cursor:pointer;border:1px solid var(--line)}
   .catch .meta{flex:1;min-width:0}
   .catch .top{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
   .catch .sp{font-weight:700}
@@ -171,34 +128,83 @@
   .empty{text-align:center;color:var(--ink-soft);padding:30px 16px;font-size:.92rem}
   .empty svg{width:54px;height:54px;opacity:.4;margin-bottom:8px}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-
+  /* photo input */
+  .photo-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:1.5px dashed var(--line);background:#fff;color:var(--water);border-radius:10px;padding:13px;font-weight:700;font-size:.92rem;cursor:pointer}
+  .photo-prev{position:relative;margin-top:8px;display:none}
+  .photo-prev.show{display:block}
+  .photo-prev img{width:100%;max-height:200px;object-fit:cover;border-radius:10px}
+  .photo-prev .rm{position:absolute;top:8px;right:8px;background:rgba(30,38,34,.8);color:#fff;border:none;border-radius:999px;width:30px;height:30px;font-size:1.1rem;cursor:pointer}
   /* modal */
   .sheet-bg{position:fixed;inset:0;background:rgba(14,58,58,.45);z-index:60;display:none;align-items:flex-end}
   .sheet-bg.on{display:flex}
-  .sheet{background:var(--sand);width:100%;max-width:560px;margin:0 auto;border-radius:20px 20px 0 0;
-    padding:8px 16px calc(20px + env(safe-area-inset-bottom));max-height:92vh;overflow:auto}
+  .sheet{background:var(--sand);width:100%;max-width:560px;margin:0 auto;border-radius:20px 20px 0 0;padding:8px 16px calc(20px + env(safe-area-inset-bottom));max-height:92vh;overflow:auto}
   .sheet .grab{width:40px;height:4px;background:var(--line);border-radius:999px;margin:8px auto 14px}
   .sheet h3{margin:0 0 14px;font-size:1.25rem}
-
-  /* bottom nav */
-  nav{
-    position:fixed;left:0;right:0;bottom:0;z-index:50;
-    background:rgba(255,255,255,.96);backdrop-filter:blur(10px);
-    border-top:1px solid var(--line);
-    display:flex;justify-content:space-around;
-    padding:8px 4px calc(8px + env(safe-area-inset-bottom));
-  }
-  .tab{flex:1;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--ink-soft);font-family:inherit}
-  .tab svg{width:23px;height:23px}
-  .tab span{font-size:.65rem;font-weight:700;letter-spacing:.3px}
+  /* lightbox */
+  .lightbox{position:fixed;inset:0;background:rgba(14,28,26,.92);z-index:90;display:none;align-items:center;justify-content:center;padding:20px}
+  .lightbox.on{display:flex}
+  .lightbox img{max-width:100%;max-height:100%;border-radius:12px}
+  .lightbox .close{position:absolute;top:calc(env(safe-area-inset-top) + 12px);right:16px;background:rgba(255,255,255,.15);color:#fff;border:none;border-radius:999px;width:40px;height:40px;font-size:1.3rem;cursor:pointer}
+  nav{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:7px 2px calc(7px + env(safe-area-inset-bottom))}
+  .tab{flex:1;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--ink-soft);font-family:inherit;padding:0}
+  .tab svg{width:22px;height:22px}
+  .tab span{font-size:.62rem;font-weight:700;letter-spacing:.2px}
   .tab.on{color:var(--water)}
   .tab.on svg{stroke:var(--brass)}
-
-  .toast{position:fixed;bottom:calc(90px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(20px);
-    background:var(--ink);color:#fff;padding:11px 18px;border-radius:999px;font-size:.88rem;font-weight:600;
-    opacity:0;pointer-events:none;transition:.3s;z-index:80;white-space:nowrap}
+  .toast{position:fixed;bottom:calc(88px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:11px 18px;border-radius:999px;font-size:.88rem;font-weight:600;opacity:0;pointer-events:none;transition:.3s;z-index:80;white-space:nowrap}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
   .footnote{font-size:.74rem;color:var(--ink-soft);text-align:center;padding:6px 10px 16px}
+  /* weather */
+  .wx-card{background:linear-gradient(160deg,#1C5E57,#0E3A3A);color:var(--sand);border-radius:16px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+  .wx-msg{font-size:.9rem;color:#CFE0DA;padding:6px 0;line-height:1.45}
+  .wx-retry{margin-top:10px;background:var(--brass);color:#fff;border:none;border-radius:10px;padding:9px 14px;font-weight:700;font-family:inherit;cursor:pointer}
+  .wx-top{display:flex;align-items:center;gap:12px}
+  .wx-temp{font-family:Georgia,serif;font-size:2.2rem;font-weight:700;line-height:1}
+  .wx-feels{font-family:-apple-system,sans-serif;font-size:.7rem;color:#9FC8BF;font-weight:600;margin-left:8px;letter-spacing:.3px}
+  .wx-cond{font-size:.95rem;color:#E7EFEC;flex:1}
+  .wx-refresh{background:rgba(255,255,255,.12);color:var(--sand);border:none;border-radius:999px;width:34px;height:34px;font-size:1.1rem;cursor:pointer;flex:0 0 auto}
+  .wx-refresh:active{transform:rotate(180deg)}
+  .wx-outlook{display:flex;align-items:center;gap:8px;margin:12px 0;padding:10px 12px;border-radius:10px;font-size:.85rem;line-height:1.35;background:rgba(255,255,255,.08)}
+  .ol-badge{flex:0 0 auto;font-weight:800;font-size:.72rem;text-transform:uppercase;letter-spacing:.6px;padding:4px 9px;border-radius:6px;color:#0E3A3A}
+  .ol-prime .ol-badge{background:#7BE0A3}.ol-good .ol-badge{background:#A8D58A}
+  .ol-fair .ol-badge{background:#E7C766}.ol-slow .ol-badge{background:#E0A07F}
+  .wx-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .wx-stats>div{background:rgba(255,255,255,.07);border-radius:10px;padding:8px 6px;text-align:center}
+  .wxk{display:block;font-size:.62rem;text-transform:uppercase;letter-spacing:.7px;color:#9FC8BF;margin-bottom:3px}
+  .wxv{display:block;font-size:.82rem;font-weight:700}
+  .wx-foot{font-size:.66rem;color:#8FB3AB;margin-top:10px;text-align:center}
+  /* best bite times */
+  .bt-card{padding:14px 16px}
+  .bt-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .bt-card h3{margin:0;font-size:1.08rem}
+  .bt-moon{font-size:.8rem;color:var(--ink-soft)}
+  .bt-strong{color:var(--coral);font-weight:700}
+  .bt-rows{margin:10px 0 8px}
+  .bt-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed var(--line)}
+  .bt-row:last-child{border-bottom:none}
+  .bt-when{font-weight:700;font-size:.92rem}
+  .bt-time{font-family:Georgia,serif;font-weight:700;color:var(--water)}
+  .bt-note{font-size:.8rem;color:var(--ink-soft);background:#FBF6EA;border-radius:8px;padding:8px 10px}
+  /* 7-day forecast */
+  .fc-card{padding:14px 16px}
+  .fc-title{font-family:Georgia,serif;font-weight:700;font-size:1.05rem;color:var(--water);margin-bottom:6px}
+  .fc-day{display:grid;grid-template-columns:42px 24px 1fr 46px 56px;align-items:center;gap:5px;padding:9px 0;border-bottom:1px solid var(--line);font-size:.9rem}
+  .fc-day:last-child{border-bottom:none}
+  .fc-name{font-weight:700}
+  .fc-emoji{font-size:1.05rem;text-align:center}
+  .fc-temp{font-weight:600}
+  .fc-lo{color:var(--ink-soft);margin-left:3px;font-weight:400}
+  .fc-wind{color:var(--ink-soft);font-size:.78rem;text-align:right}
+  .fc-badge{justify-self:end;font-weight:800;font-size:.62rem;text-transform:uppercase;letter-spacing:.3px;padding:3px 6px;border-radius:6px;color:#0E3A3A;text-align:center;min-width:50px}
+  .b-prime{background:#7BE0A3}.b-good{background:#A8D58A}.b-fair{background:#E7C766}.b-slow{background:#E0A07F}
+  /* leaderboard */
+  .lb-card{padding:14px 16px;background:linear-gradient(160deg,#fff,#FBF6EA)}
+  .lb-title{font-family:Georgia,serif;font-weight:700;font-size:1.05rem;color:var(--water);margin-bottom:4px}
+  .lb-row{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--line)}
+  .lb-row:last-child{border-bottom:none}
+  .lb-name{font-weight:700;min-width:64px;flex:0 0 auto}
+  .lb-c{flex:1;text-align:center;font-size:.84rem;color:var(--ink-soft);font-weight:600}
+  .lb-b{font-size:.84rem;color:var(--ink-soft);text-align:right;font-weight:600}
 </style>
 </head>
 <body>
@@ -214,47 +220,33 @@
 </header>
 
 <main>
-  <!-- ============ TODAY ============ -->
+  <!-- TODAY -->
   <section id="today" class="view active">
     <div class="eyebrow">On the water</div>
     <h2 class="section">What to throw today</h2>
     <p class="lede">Set the conditions and Gaston Cast tells you what's biting and how to catch it.</p>
-
+    <div class="wx-card" id="wxCard"><div class="wx-msg">Loading Lake Gaston conditions…</div></div>
+    <div id="bestTimes"></div>
+    <div id="forecast"></div>
     <div class="card">
-      <div class="field">
-        <label>Season</label>
-        <div class="chips" id="q-season"></div>
-      </div>
-      <div class="field">
-        <label>Where you're fishing</label>
-        <div class="chips" id="q-spot">
-          <button class="chip on" data-v="dock">Off the dock</button>
-          <button class="chip" data-v="boat">From the boat</button>
-        </div>
-      </div>
-      <div class="field">
-        <label>Time of day</label>
-        <div class="chips" id="q-time">
-          <button class="chip on" data-v="dawn">Dawn / dusk</button>
-          <button class="chip" data-v="day">Midday</button>
-          <button class="chip" data-v="night">Night</button>
-        </div>
-      </div>
-      <div class="field">
-        <label>Sky</label>
-        <div class="chips" id="q-sky">
-          <button class="chip on" data-v="clear">Clear / sunny</button>
-          <button class="chip" data-v="cloud">Overcast</button>
-          <button class="chip" data-v="front">Cold front passed</button>
-        </div>
-      </div>
+      <div class="field"><label>Season</label><div class="chips" id="q-season"></div></div>
+      <div class="field"><label>Where you're fishing</label><div class="chips" id="q-spot">
+        <button class="chip on" data-v="dock">Off the dock</button>
+        <button class="chip" data-v="boat">From the boat</button></div></div>
+      <div class="field"><label>Time of day</label><div class="chips" id="q-time">
+        <button class="chip on" data-v="dawn">Dawn / dusk</button>
+        <button class="chip" data-v="day">Midday</button>
+        <button class="chip" data-v="night">Night</button></div></div>
+      <div class="field"><label>Sky</label><div class="chips" id="q-sky">
+        <button class="chip on" data-v="clear">Clear / sunny</button>
+        <button class="chip" data-v="cloud">Overcast</button>
+        <button class="chip" data-v="front">Cold front passed</button></div></div>
       <button class="btn" id="recBtn">Get the game plan</button>
     </div>
-
     <div id="recOut"></div>
   </section>
 
-  <!-- ============ FISH ============ -->
+  <!-- FISH -->
   <section id="fish" class="view">
     <div class="eyebrow">Field guide</div>
     <h2 class="section">Lake Gaston fish</h2>
@@ -262,7 +254,15 @@
     <div id="fishList"></div>
   </section>
 
-  <!-- ============ KNOTS ============ -->
+  <!-- RIGS -->
+  <section id="rigs" class="view">
+    <div class="eyebrow">Know your gear</div>
+    <h2 class="section">Rigs &amp; tackle, drawn out</h2>
+    <p class="lede">What each setup actually looks like — so you can match the names to the gear in the tackle box.</p>
+    <div id="rigList"></div>
+  </section>
+
+  <!-- KNOTS -->
   <section id="knots" class="view">
     <div class="eyebrow">Rigging</div>
     <h2 class="section">Knots that hold</h2>
@@ -270,7 +270,7 @@
     <div id="knotList"></div>
   </section>
 
-  <!-- ============ GEAR ============ -->
+  <!-- GEAR -->
   <section id="gear" class="view">
     <div class="eyebrow">Tackle box</div>
     <h2 class="section">Gear that works here</h2>
@@ -278,11 +278,12 @@
     <div id="gearList"></div>
   </section>
 
-  <!-- ============ LOG ============ -->
+  <!-- LOG -->
   <section id="log" class="view">
     <div class="eyebrow">Catch log</div>
     <h2 class="section">Your fishing log</h2>
     <p class="lede">Every catch you record builds your own Gaston playbook.</p>
+    <div id="leaderboard"></div>
     <div class="stat-row" id="stats"></div>
     <button class="btn coral" id="addCatchBtn" style="margin-bottom:16px">+ Log a catch</button>
     <div id="catchList"></div>
@@ -296,25 +297,21 @@
   <div class="sheet">
     <div class="grab"></div>
     <h3>Log a catch</h3>
-    <div class="field">
-      <label>Who caught it</label>
-      <div class="chips" id="f-who"></div>
-    </div>
-    <div class="field">
-      <label>Species</label>
-      <select id="f-species"></select>
-    </div>
+    <div class="field"><label>Who caught it</label><div class="chips" id="f-who"></div></div>
+    <div class="field"><label>Species</label><select id="f-species"></select></div>
     <div class="grid2">
       <div class="field"><label>Length (in)</label><input id="f-len" type="number" inputmode="decimal" placeholder="14.5"></div>
       <div class="field"><label>Weight (lb)</label><input id="f-wt" type="number" inputmode="decimal" placeholder="2.0"></div>
     </div>
     <div class="field"><label>Bait / lure</label><input id="f-bait" type="text" placeholder="Texas-rig Senko, minnow…"></div>
+    <div class="field"><label>Spot</label><div class="chips" id="f-spot">
+      <button class="chip on" data-v="Dock">Dock</button>
+      <button class="chip" data-v="Boat">Boat</button></div></div>
     <div class="field">
-      <label>Spot</label>
-      <div class="chips" id="f-spot">
-        <button class="chip on" data-v="Dock">Dock</button>
-        <button class="chip" data-v="Boat">Boat</button>
-      </div>
+      <label>Photo (optional)</label>
+      <label class="photo-btn" for="f-photo">📷 Add a photo of the catch</label>
+      <input id="f-photo" type="file" accept="image/*" style="display:none">
+      <div class="photo-prev" id="photoPrev"><img id="photoPrevImg" alt="catch preview"><button class="rm" id="photoRm" aria-label="Remove photo">×</button></div>
     </div>
     <div class="field"><label>Notes (optional)</label><textarea id="f-notes" rows="2" placeholder="Near the neighbor's pilings, water was murky…"></textarea></div>
     <button class="btn coral" id="saveCatch">Save catch</button>
@@ -322,11 +319,13 @@
   </div>
 </div>
 
+<div class="lightbox" id="lightbox"><button class="close" id="lbClose">×</button><img id="lbImg" alt="catch photo"></div>
 <div class="toast" id="toast"></div>
 
 <nav>
   <button class="tab on" data-view="today"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 3v2M5 12H3m18 0h-2M6 6 4.5 4.5M18 6l1.5-1.5M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg><span>Today</span></button>
   <button class="tab" data-view="fish"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16.5 7.5c-3.5-3-9-2.5-12 1.5-3 3.5-3 6 0 6.5 3 4 8.5 4.5 12 1.5L22 12z"/><circle cx="9" cy="11" r="1" fill="currentColor" stroke="none"/></svg><span>Fish</span></button>
+  <button class="tab" data-view="rigs"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 3v6M9 6a3 3 0 0 1 6 0"/><circle cx="12" cy="13" r="3"/><path d="M12 16c0 3-3 3-3 5"/></svg><span>Rigs</span></button>
   <button class="tab" data-view="knots"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M7 7c4 0 4 5 0 5s-4 5 0 5m10-15c-4 0-4 5 0 5s4 5 0 5"/></svg><span>Knots</span></button>
   <button class="tab" data-view="gear"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 8h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg><span>Gear</span></button>
   <button class="tab" data-view="log"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h13l3 3v13a1 1 0 0 1-1 1H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg><span>Log</span></button>
@@ -335,483 +334,642 @@
 <script>
 "use strict";
 
-/* ---------- safe storage (localStorage with in-memory fallback) ---------- */
+/* ---------- safe storage ---------- */
 const Store = (() => {
   let mem = {}; let ok = true;
-  try { localStorage.setItem("__t","1"); localStorage.removeItem("__t"); }
-  catch(e){ ok = false; }
+  try { localStorage.setItem("__t","1"); localStorage.removeItem("__t"); } catch(e){ ok=false; }
   return {
-    get(k){ try { return ok ? localStorage.getItem(k) : (mem[k] ?? null); } catch(e){ return mem[k] ?? null; } },
-    set(k,v){ try { ok ? localStorage.setItem(k,v) : (mem[k]=v); } catch(e){ mem[k]=v; } },
+    get(k){ try{ return ok ? localStorage.getItem(k) : (mem[k] ?? null); }catch(e){ return mem[k] ?? null; } },
+    set(k,v){ try{ ok ? localStorage.setItem(k,v) : (mem[k]=v); }catch(e){ mem[k]=v; throw e; } },
     persistent: ok
   };
 })();
 
-/* ---------- fish silhouette icon ---------- */
 function fishIcon(color){
   return `<svg class="fishicon" viewBox="0 0 100 60" aria-hidden="true">
     <path d="M12 30c10-18 38-18 50 0-12 18-40 18-50 0z" fill="${color}"/>
     <path d="M62 30l22-14v28z" fill="${color}"/>
-    <circle cx="28" cy="25" r="3.4" fill="#fff"/><circle cx="28" cy="25" r="1.6" fill="#1E2622"/>
-  </svg>`;
+    <circle cx="28" cy="25" r="3.4" fill="#fff"/><circle cx="28" cy="25" r="1.6" fill="#1E2622"/></svg>`;
 }
 
 /* ============================ DATA ============================ */
 const SEASONS = [
-  {v:"spring", label:"Spring", months:[2,3,4]},
-  {v:"summer", label:"Summer", months:[5,6,7]},
-  {v:"fall",   label:"Fall",   months:[8,9,10]},
-  {v:"winter", label:"Winter", months:[11,0,1]}
+  {v:"spring",label:"Spring",months:[2,3,4]},
+  {v:"summer",label:"Summer",months:[5,6,7]},
+  {v:"fall",label:"Fall",months:[8,9,10]},
+  {v:"winter",label:"Winter",months:[11,0,1]}
 ];
 
 const FISH = [
-  {
-    id:"largemouth", name:"Largemouth Bass", color:"#3E7D58",
-    tagline:"The headliner — and they love dock pilings",
-    tags:["dock","boat"],
-    season:{spring:"hot",summer:"ok",fall:"hot",winter:"slow"},
-    baits:["Texas-rigged Senko / worm","Skirted jig (flip the docks)","Squarebill & lipless crankbait","Spinnerbait","Topwater walker / popper (low light)"],
-    where:"Shade and structure. Off your dock, flip or skip a soft plastic tight to the pilings — bass sit in the shade all day. By boat, work points, laydowns, and grass edges.",
-    seasonNotes:"Spring: shallow on the spawn, sight-fish beds. Summer: topwater at first light, then go deeper midday. Fall: they chase shad — burn a spinnerbait or squarebill. Winter: slow a jig, fish deep and patient.",
-    best:"First and last light. Overcast days stretch the bite longer.",
-    kid:false
-  },
-  {
-    id:"striper", name:"Striped Bass (Rockfish)", color:"#3a5a86",
-    tagline:"Hard-pulling schoolers — mostly a boat game",
-    tags:["boat"],
-    season:{spring:"hot",summer:"ok",fall:"hot",winter:"ok"},
-    baits:["Live gizzard shad / blueback herring (down-lined)","Bucktail jig","Topwater (fall schooling blitzes)","Swimbait / flutter spoon"],
-    where:"Open water. Find bait and birds with your electronics, then down-line live shad or cast into surface schools. Spring run pushes fish up toward the headwaters and dam.",
-    seasonNotes:"Spring & fall are prime — fish blow up on schools at the surface. Summer: they pull deep and cool, so down-line live bait early and late. Watch for diving gulls in fall.",
-    best:"Dawn and dusk; fall topwater blitzes can happen midday.",
-    kid:false
-  },
-  {
-    id:"crappie", name:"Crappie", color:"#7a6aa0",
-    tagline:"Light tackle, great eating, perfect off the dock",
-    tags:["dock","boat","kid"],
-    season:{spring:"hot",summer:"ok",fall:"ok",winter:"ok"},
-    baits:["Minnow under a slip bobber","1/16 oz jig (chartreuse, pink/white)","Small curly-tail grub"],
-    where:"Brush, docks, and bridge pilings. Drop a minnow under a bobber tight to your dock posts. By boat, find brush piles and bridge columns and vertical-jig them.",
-    seasonNotes:"Spring (water 58–65°F): they move shallow to spawn around cover — easiest fishing of the year. Summer/fall: deeper on brush piles. Winter: tight to deep cover, fish slow.",
-    best:"Spring spawn is unbeatable. Low light helps year-round.",
-    kid:true
-  },
-  {
-    id:"bream", name:"Bream / Bluegill", color:"#C8881E",
-    tagline:"Nonstop action — the best fish to hook a kid on",
-    tags:["dock","kid"],
-    season:{spring:"hot",summer:"hot",fall:"ok",winter:"slow"},
-    baits:["Cricket or red worm under a bobber","Tiny #6–#8 hook, light line","Small popping bug on a fly/ultralight"],
-    where:"Right off the dock and along any shoreline cover. In late spring look for saucer-shaped beds in shallow coves — drop a worm in and hang on.",
-    seasonNotes:"Spring/summer spawn = constant bites in skinny water. They bed in colonies, so when you catch one, work that spot. Slows way down in cold water.",
-    best:"Warm afternoons, spring through summer. Ideal first-fish for Patrick.",
-    kid:true
-  },
-  {
-    id:"catfish", name:"Catfish", color:"#5A675F",
-    tagline:"Set the rod, wait for the bend — easy from the dock",
-    tags:["dock","boat","kid"],
-    season:{spring:"ok",summer:"hot",fall:"hot",winter:"ok"},
-    baits:["Cut bait (gizzard shad) — blues & flatheads","Chicken liver / nightcrawler — channels","Prepared dip / stink bait — channels"],
-    where:"On the bottom. Cast off the dock with a sinker rig and prop the rod in a holder. By boat, target deeper channels and current near the river.",
-    seasonNotes:"Summer and fall evenings are best. Channels eat almost anything; the big blues and flatheads want fresh cut or live bait near deep water.",
-    best:"Evening into night, warm months. Low-effort and great for kids waiting on a bite.",
-    kid:true
-  },
-  {
-    id:"whiteperch", name:"White Perch", color:"#9a8550",
-    tagline:"School fish — find one, find fifty",
-    tags:["boat"],
-    season:{spring:"ok",summer:"hot",fall:"ok",winter:"ok"},
-    baits:["Small jigging spoon","Beetle-spin / small grub","Minnow on a dropper rig"],
-    where:"Suspended over deeper water and humps in summer. Find a school on electronics and drop a spoon straight down — you can load the cooler fast.",
-    seasonNotes:"Summer schools stack over deep structure. They run small but are aggressive and excellent eating. Great backup when the bass bite is slow.",
-    best:"Summer, mid-depth over structure, all day once you find them.",
-    kid:false
-  }
+  {id:"largemouth",name:"Largemouth Bass",color:"#3E7D58",tagline:"The headliner — and they love dock pilings",tags:["dock","boat"],rigs:["texas","worm","spinner","crank","topwater"],
+   season:{spring:"hot",summer:"ok",fall:"hot",winter:"slow"},
+   baits:["Texas-rigged Senko / worm","Skirted jig (flip the docks)","Squarebill & lipless crankbait","Spinnerbait","Topwater walker / popper (low light)"],
+   where:"Shade and structure. Off your dock, flip or skip a soft plastic tight to the pilings — bass sit in the shade all day. By boat, work points, laydowns, and grass edges.",
+   seasonNotes:"Spring: shallow on the spawn, sight-fish beds. Summer: topwater at first light, then go deeper midday. Fall: they chase shad — burn a spinnerbait or squarebill. Winter: slow a jig, fish deep and patient.",
+   best:"First and last light. Overcast days stretch the bite longer.",kid:false},
+  {id:"striper",name:"Striped Bass (Rockfish)",color:"#3a5a86",tagline:"Hard-pulling schoolers — mostly a boat game",tags:["boat"],rigs:["topwater","worm"],
+   season:{spring:"hot",summer:"ok",fall:"hot",winter:"ok"},
+   baits:["Live gizzard shad / blueback herring (down-lined)","Bucktail jig","Topwater (fall schooling blitzes)","Swimbait / flutter spoon"],
+   where:"Open water. Find bait and birds with your electronics, then down-line live shad or cast into surface schools. Spring run pushes fish up toward the headwaters and dam.",
+   seasonNotes:"Spring & fall are prime — fish blow up on schools at the surface. Summer: they pull deep and cool, so down-line live bait early and late. Watch for diving gulls in fall.",
+   best:"Dawn and dusk; fall topwater blitzes can happen midday.",kid:false},
+  {id:"crappie",name:"Crappie",color:"#7a6aa0",tagline:"Light tackle, great eating, perfect off the dock",tags:["dock","boat","kid"],rigs:["slipbobber","jig"],
+   season:{spring:"hot",summer:"ok",fall:"ok",winter:"ok"},
+   baits:["Minnow under a slip bobber","1/16 oz jig (chartreuse, pink/white)","Small curly-tail grub"],
+   where:"Brush, docks, and bridge pilings. Drop a minnow under a bobber tight to your dock posts. By boat, find brush piles and bridge columns and vertical-jig them.",
+   seasonNotes:"Spring (water 58–65°F): they move shallow to spawn around cover — easiest fishing of the year. Summer/fall: deeper on brush piles. Winter: tight to deep cover, fish slow.",
+   best:"Spring spawn is unbeatable. Low light helps year-round.",kid:true},
+  {id:"bream",name:"Bream / Bluegill",color:"#C8881E",tagline:"Nonstop action — the best fish to hook a kid on",tags:["dock","kid"],rigs:["bobber","slipbobber"],
+   season:{spring:"hot",summer:"hot",fall:"ok",winter:"slow"},
+   baits:["Cricket or red worm under a bobber","Tiny #6–#8 hook, light line","Small popping bug on a fly/ultralight"],
+   where:"Right off the dock and along any shoreline cover. In late spring look for saucer-shaped beds in shallow coves — drop a worm in and hang on.",
+   seasonNotes:"Spring/summer spawn = constant bites in skinny water. They bed in colonies, so when you catch one, work that spot. Slows way down in cold water.",
+   best:"Warm afternoons, spring through summer. Ideal first-fish for Patrick.",kid:true},
+  {id:"catfish",name:"Catfish",color:"#5A675F",tagline:"Set the rod, wait for the bend — easy from the dock",tags:["dock","boat","kid"],rigs:["carolina"],
+   season:{spring:"ok",summer:"hot",fall:"hot",winter:"ok"},
+   baits:["Cut bait (gizzard shad) — blues & flatheads","Chicken liver / nightcrawler — channels","Prepared dip / stink bait — channels"],
+   where:"On the bottom. Cast off the dock with a sinker rig and prop the rod in a holder. By boat, target deeper channels and current near the river.",
+   seasonNotes:"Summer and fall evenings are best. Channels eat almost anything; the big blues and flatheads want fresh cut or live bait near deep water.",
+   best:"Evening into night, warm months. Low-effort and great for kids waiting on a bite.",kid:true},
+  {id:"whiteperch",name:"White Perch",color:"#9a8550",tagline:"School fish — find one, find fifty",tags:["boat"],rigs:["jig","carolina"],
+   season:{spring:"ok",summer:"hot",fall:"ok",winter:"ok"},
+   baits:["Small jigging spoon","Beetle-spin / small grub","Minnow on a dropper rig"],
+   where:"Suspended over deeper water and humps in summer. Find a school on electronics and drop a spoon straight down — you can load the cooler fast.",
+   seasonNotes:"Summer schools stack over deep structure. They run small but are aggressive and excellent eating. Great backup when the bass bite is slow.",
+   best:"Summer, mid-depth over structure, all day once you find them.",kid:false}
 ];
 
 const KNOTS = [
-  {
-    id:"palomar", name:"Palomar", stars:5,
-    for:"Tying braid or mono straight to a hook, swivel, or lure. The strongest, simplest all-rounder.",
-    steps:[
-      "Double about 6 inches of line and pass the loop through the eye of the hook.",
-      "Tie a loose overhand knot with the doubled line — leave the hook hanging.",
-      "Pass the hook completely through the open loop.",
-      "Wet the knot, then pull both the tag and main line to cinch it down tight.",
-      "Trim the tag close."
-    ]
-  },
-  {
-    id:"clinch", name:"Improved Clinch", stars:4,
-    for:"The classic for tying mono or fluoro to a hook or lure. Quick and reliable.",
-    steps:[
-      "Thread the line through the eye, leaving 6 inches of tag.",
-      "Wrap the tag around the main line 5–7 times.",
-      "Pass the tag back through the small loop just above the eye.",
-      "Then pass it through the big loop you just formed.",
-      "Wet it, pull the main line to seat the wraps, and trim."
-    ]
-  },
-  {
-    id:"uni", name:"Uni Knot", stars:4,
-    for:"A versatile terminal knot — and tie two together (double uni) to join two lines, like braid to a leader.",
-    steps:[
-      "Run the line through the eye and fold it back parallel to itself.",
-      "Make a loop and wrap the tag through it and around both lines 5–6 times.",
-      "Wet the knot and pull the tag to snug the wraps into a barrel.",
-      "Slide the barrel down to the eye and pull the main line tight.",
-      "Trim. For line-to-line, tie a uni on each line and pull them together."
-    ]
-  },
-  {
-    id:"loop", name:"Non-Slip Loop", stars:4,
-    for:"Leaves an open loop at the lure so jerkbaits and topwater swing freely and look alive.",
-    steps:[
-      "Tie a loose overhand knot a few inches up the line; pass the tag through the eye.",
-      "Run the tag back through that overhand knot.",
-      "Wrap the tag around the main line 4–5 times.",
-      "Bring the tag back through the overhand knot again (same side it exited).",
-      "Wet, seat the wraps, then pull the loop and main line tight. Trim."
-    ]
-  },
-  {
-    id:"snell", name:"Snell Knot", stars:3,
-    for:"Wraps line around the hook shank for a strong straight-line pull — great on catfish and bait rigs.",
-    steps:[
-      "Pass the line through the eye, then back through again, leaving a loop along the shank.",
-      "Hold the loop against the shank with a long tag.",
-      "Wrap the tag around both the shank and the line 6–8 times, working toward the eye.",
-      "Hold the wraps and pull the main line to draw them tight against the shank.",
-      "Wet, seat firmly, and trim the tag."
-    ]
-  }
+  {id:"palomar",name:"Palomar",stars:5,for:"Tying braid or mono straight to a hook, swivel, or lure. The strongest, simplest all-rounder.",
+   steps:["Double about 6 inches of line and pass the loop through the eye of the hook.","Tie a loose overhand knot with the doubled line — leave the hook hanging.","Pass the hook completely through the open loop.","Wet the knot, then pull both the tag and main line to cinch it down tight.","Trim the tag close."]},
+  {id:"clinch",name:"Improved Clinch",stars:4,for:"The classic for tying mono or fluoro to a hook or lure. Quick and reliable.",
+   steps:["Thread the line through the eye, leaving 6 inches of tag.","Wrap the tag around the main line 5–7 times.","Pass the tag back through the small loop just above the eye.","Then pass it through the big loop you just formed.","Wet it, pull the main line to seat the wraps, and trim."]},
+  {id:"uni",name:"Uni Knot",stars:4,for:"A versatile terminal knot — and tie two together (double uni) to join two lines, like braid to a leader.",
+   steps:["Run the line through the eye and fold it back parallel to itself.","Make a loop and wrap the tag through it and around both lines 5–6 times.","Wet the knot and pull the tag to snug the wraps into a barrel.","Slide the barrel down to the eye and pull the main line tight.","Trim. For line-to-line, tie a uni on each line and pull them together."]},
+  {id:"loop",name:"Non-Slip Loop",stars:4,for:"Leaves an open loop at the lure so jerkbaits and topwater swing freely and look alive.",
+   steps:["Tie a loose overhand knot a few inches up the line; pass the tag through the eye.","Run the tag back through that overhand knot.","Wrap the tag around the main line 4–5 times.","Bring the tag back through the overhand knot again (same side it exited).","Wet, seat the wraps, then pull the loop and main line tight. Trim."]},
+  {id:"snell",name:"Snell Knot",stars:3,for:"Wraps line around the hook shank for a strong straight-line pull — great on catfish and bait rigs.",
+   steps:["Pass the line through the eye, then back through again, leaving a loop along the shank.","Hold the loop against the shank with a long tag.","Wrap the tag around both the shank and the line 6–8 times, working toward the eye.","Hold the wraps and pull the main line to draw them tight against the shank.","Wet, seat firmly, and trim the tag."]}
 ];
 
 const GEAR = [
-  {
-    name:"All-purpose dock combo", icon:"⭐",
-    forwho:"Your everyday setup — covers bass, crappie, and catfish from the dock.",
-    specs:[["Rod","6'6\"–7' medium spinning"],["Reel","2500–3000 spinning"],["Line","10 lb mono or 15 lb braid + leader"],["Throw it for","Soft plastics, bobber rigs, light bottom rigs"]]
-  },
-  {
-    name:"Patrick's panfish combo", icon:"🎣", kid:true,
-    forwho:"Light, short, and easy to cast — built so a kid catches fish, not frustration.",
-    specs:[["Rod","5'–5'6\" light spinning or spincast"],["Reel","1000–2000 (or push-button)"],["Line","4–6 lb mono"],["Rig","Bobber + #6 hook + split shot + worm"]]
-  },
-  {
-    name:"Bass flippin' stick", icon:"🐟",
-    forwho:"For working jigs and Texas rigs tight to dock pilings and cover.",
-    specs:[["Rod","7' medium-heavy, fast action"],["Reel","Baitcaster (or stout spinning)"],["Line","15–17 lb fluoro or 30 lb braid"],["Throw it for","Jigs, Texas-rig worms, big plastics"]]
-  },
-  {
-    name:"Striper / live-bait rig", icon:"🚤",
-    forwho:"For chasing rockfish by boat with live shad or bucktails.",
-    specs:[["Rod","7'–7'6\" medium-heavy"],["Reel","4000+ spinning or conventional"],["Line","15–20 lb"],["Terminal","Circle hooks, egg sinkers, down-line setup"]]
-  },
-  {
-    name:"Catfish bottom rig", icon:"🌙",
-    forwho:"Set it off the dock at dusk and wait for the rod to load up.",
-    specs:[["Rod","7' medium-heavy"],["Reel","3000–4000 with a firm drag"],["Line","15–30 lb"],["Terminal","Carolina rig, 1–3 oz sinker, circle hook"]]
-  },
-  {
-    name:"Starter tackle box", icon:"🧰",
-    forwho:"A short shopping list that'll cover most days on Gaston.",
-    specs:[["Soft plastics","Senkos, ribbon-tail worms (green pumpkin)"],["Hard baits","Squarebill crank, lipless, a topwater walker"],["Terminal","Hooks #6–4/0, bullet weights, split shot, swivels"],["Panfish","Slip bobbers, crappie jigs, #6 hooks, minnow bucket"]]
-  }
+  {name:"All-purpose dock combo",icon:"⭐",forwho:"Your everyday setup — covers bass, crappie, and catfish from the dock.",
+   specs:[["Rod","6'6\"–7' medium spinning"],["Reel","2500–3000 spinning"],["Line","10 lb mono or 15 lb braid + leader"],["Throw it for","Soft plastics, bobber rigs, light bottom rigs"]]},
+  {name:"Patrick's panfish combo",icon:"🎣",kid:true,forwho:"Light, short, and easy to cast — built so a kid catches fish, not frustration.",
+   specs:[["Rod","5'–5'6\" light spinning or spincast"],["Reel","1000–2000 (or push-button)"],["Line","4–6 lb mono"],["Rig","Bobber + #6 hook + split shot + worm"]]},
+  {name:"Bass flippin' stick",icon:"🐟",forwho:"For working jigs and Texas rigs tight to dock pilings and cover.",
+   specs:[["Rod","7' medium-heavy, fast action"],["Reel","Baitcaster (or stout spinning)"],["Line","15–17 lb fluoro or 30 lb braid"],["Throw it for","Jigs, Texas-rig worms, big plastics"]]},
+  {name:"Striper / live-bait rig",icon:"🚤",forwho:"For chasing rockfish by boat with live shad or bucktails.",
+   specs:[["Rod","7'–7'6\" medium-heavy"],["Reel","4000+ spinning or conventional"],["Line","15–20 lb"],["Terminal","Circle hooks, egg sinkers, down-line setup"]]},
+  {name:"Catfish bottom rig",icon:"🌙",forwho:"Set it off the dock at dusk and wait for the rod to load up.",
+   specs:[["Rod","7' medium-heavy"],["Reel","3000–4000 with a firm drag"],["Line","15–30 lb"],["Terminal","Carolina rig, 1–3 oz sinker, circle hook"]]},
+  {name:"Starter tackle box",icon:"🧰",forwho:"A short shopping list that'll cover most days on Gaston.",
+   specs:[["Soft plastics","Senkos, ribbon-tail worms (green pumpkin)"],["Hard baits","Squarebill crank, lipless, a topwater walker"],["Terminal","Hooks #6–4/0, bullet weights, split shot, swivels"],["Panfish","Slip bobbers, crappie jigs, #6 hooks, minnow bucket"]]}
+];
+
+/* ===== RIG / TACKLE DIAGRAMS (labeled SVG) ===== */
+function lbl(x,y,t,anchor){ return `<text x="${x}" y="${y}" font-size="11" font-weight="600" fill="#1E2622" text-anchor="${anchor||'start'}" font-family="-apple-system,Helvetica,Arial,sans-serif">${t}</text>`; }
+function leader(x1,y1,x2,y2){ return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#A9B2A8" stroke-width="1"/>`; }
+
+const RIGS = [
+  {group:"Rigs — how it all goes together",items:[
+    {id:"slipbobber",name:"Slip bobber rig",use:"The crappie & bream classic. The float slides on the line so you can fish any depth.",
+     tip:"The little bobber stop knot is what sets your depth — slide it up the line to fish deeper.",
+     svg:()=>`<svg class="rig-svg" viewBox="0 0 340 250"><rect width="340" height="250" fill="#FBFAF6"/>
+       <rect x="0" y="78" width="340" height="172" fill="#EAF1EF"/>
+       <line x1="120" y1="14" x2="120" y2="230" stroke="#7d756a" stroke-width="1.6"/>
+       <!-- bobber stop -->
+       <circle cx="120" cy="40" r="4" fill="#1E2622"/>
+       ${leader(124,40,210,32)}${lbl(214,36,"Bobber stop knot")}
+       <!-- bead -->
+       <circle cx="120" cy="56" r="4.5" fill="#C8881E"/>
+       ${leader(124,56,210,58)}${lbl(214,62,"Bead")}
+       <!-- float -->
+       <ellipse cx="120" cy="92" rx="13" ry="22" fill="#E0623B"/><ellipse cx="120" cy="104" rx="13" ry="10" fill="#fff"/><rect x="118" y="68" width="4" height="10" fill="#1E2622"/>
+       ${leader(135,92,210,92)}${lbl(214,96,"Slip float (bobber)")}
+       <!-- split shot -->
+       <circle cx="120" cy="150" r="5.5" fill="#8A8F94"/>
+       ${leader(127,150,210,148)}${lbl(214,152,"Split shot (weight)")}
+       <!-- hook + minnow -->
+       <path d="M120 175 q0 22 -12 22 q-12 0 -12 -12" fill="none" stroke="#6B7A82" stroke-width="2.4"/>
+       <ellipse cx="104" cy="208" rx="16" ry="8" fill="#9bb0c2"/><circle cx="92" cy="207" r="1.6" fill="#1E2622"/>
+       ${leader(96,200,210,182)}${lbl(214,186,"Hook + live minnow")}
+       <text x="14" y="26" font-size="10" fill="#5A675F" font-family="-apple-system,Helvetica,Arial">to rod ↑</text>
+       <text x="300" y="244" font-size="10" fill="#5A675F" text-anchor="end" font-family="-apple-system,Helvetica,Arial">~ waterline</text></svg>`},
+    {id:"bobber",name:"Fixed bobber rig",use:"The simplest rig there is — the round clip-on bobber. Perfect first rig for Patrick.",
+     tip:"Set it shallow (1–3 ft). When the bobber dips under, that's the bite — lift to set the hook.",
+     svg:()=>`<svg class="rig-svg" viewBox="0 0 340 220"><rect width="340" height="220" fill="#FBFAF6"/>
+       <rect x="0" y="70" width="340" height="150" fill="#EAF1EF"/>
+       <line x1="120" y1="14" x2="120" y2="200" stroke="#7d756a" stroke-width="1.6"/>
+       <circle cx="120" cy="78" r="18" fill="#E0623B"/><path d="M102 78a18 18 0 0 0 36 0z" fill="#fff"/><circle cx="120" cy="78" r="4" fill="#1E2622"/>
+       ${leader(138,72,212,64)}${lbl(216,68,"Round clip-on bobber")}
+       <path d="M120 150 q0 20 -11 20 q-11 0 -11 -11" fill="none" stroke="#6B7A82" stroke-width="2.4"/>
+       <path d="M99 168 q-9 6 -16 3 q5 -8 0 -14 q9 5 16 1z" fill="#8a6f4a"/>
+       ${leader(95,162,212,150)}${lbl(216,154,"Hook + worm")}
+       <text x="14" y="26" font-size="10" fill="#5A675F" font-family="-apple-system,Helvetica,Arial">to rod ↑</text></svg>`},
+    {id:"texas",name:"Texas rig",use:"The go-to weedless bass rig. The hook point tucks into the worm so it slides through cover snag-free.",
+     tip:"Great for skipping a soft plastic under your dock and dragging it past the pilings.",
+     svg:()=>`<svg class="rig-svg" viewBox="0 0 340 180"><rect width="340" height="180" fill="#FBFAF6"/>
+       <line x1="20" y1="60" x2="120" y2="60" stroke="#7d756a" stroke-width="1.6"/>
+       <text x="20" y="50" font-size="10" fill="#5A675F" font-family="-apple-system,Helvetica,Arial">line ←</text>
+       <!-- bullet weight -->
+       <path d="M120 50 l24 10 l-24 10 z" fill="#7A8087"/>
+       ${leader(132,46,150,24)}${lbl(154,24,"Bullet weight")}
+       <!-- worm body -->
+       <path d="M144 60 q40 -4 70 6 q40 12 80 -2" fill="none" stroke="#6E7A3A" stroke-width="13" stroke-linecap="round"/>
+       ${leader(214,60,210,116)}${lbl(170,130,"Soft plastic worm")}
+       <!-- hook hidden, point shown -->
+       <path d="M170 64 q6 26 22 26 q14 0 14 -14" fill="none" stroke="#6B7A82" stroke-width="2.4" opacity=".85"/>
+       ${leader(206,82,300,148)}${lbl(300,152,"Hook buried = weedless","end")}</svg>`},
+    {id:"carolina",name:"Bottom (Carolina) rig",use:"The catfish & bottom-feeder setup. Heavy sinker holds bottom; the bait sits just off it on a leader.",
+     tip:"Cast off the dock, tighten the line, prop the rod up, and watch the tip. A catfish loads it slow and heavy.",
+     svg:()=>`<svg class="rig-svg" viewBox="0 0 340 200"><rect width="340" height="200" fill="#FBFAF6"/>
+       <rect x="0" y="150" width="340" height="50" fill="#cdbf9e"/>
+       <line x1="30" y1="40" x2="120" y2="148" stroke="#7d756a" stroke-width="1.6"/>
+       <text x="24" y="34" font-size="10" fill="#5A675F" font-family="-apple-system,Helvetica,Arial">to rod ←</text>
+       <!-- egg sinker -->
+       <ellipse cx="118" cy="150" rx="15" ry="10" fill="#7A8087"/>
+       ${leader(118,140,150,98)}${lbl(154,98,"Heavy sinker")}
+       <!-- swivel -->
+       <circle cx="150" cy="150" r="5" fill="#9aa0a6"/>${leader(155,148,200,124)}${lbl(204,127,"Swivel")}
+       <!-- leader to hook -->
+       <line x1="155" y1="150" x2="245" y2="150" stroke="#7d756a" stroke-width="1.4"/>
+       <path d="M245 150 q14 0 14 -12 q0 -10 -10 -10" fill="none" stroke="#6B7A82" stroke-width="2.4"/>
+       <ellipse cx="262" cy="150" rx="13" ry="7" fill="#b08457"/>
+       ${leader(262,143,322,112)}${lbl(322,116,"Hook + bait","end")}
+       <text x="300" y="178" font-size="10" fill="#5A675F" text-anchor="end" font-family="-apple-system,Helvetica,Arial">lake bottom</text></svg>`}
+  ]},
+  {group:"What's in the tackle box — name that gear",items:[
+    {id:"jig",name:"Jig & jig head",use:"A weighted hook with a soft body. The little 1/16 oz size with a curly tail is THE crappie lure.",
+     tip:"The bare lead head with the eye molded in is a 'jig head' — you slide a soft body or marabou onto it.",
+     svg:()=>`<svg class="rig-svg" viewBox="0 0 340 150"><rect width="340" height="150" fill="#FBFAF6"/>
+       <!-- jig head -->
+       <circle cx="90" cy="60" r="16" fill="#1C5E57"/><circle cx="84" cy="54" r="3.5" fill="#fff"/><circle cx="84" cy="54" r="1.6" fill="#1E2622"/>
+       <circle cx="78" cy="46" r="4" fill="none" stroke="#6B7A82" stroke-width="2"/>
+       <path d="M96 72 q10 22 -6 30 q-14 0 -14 -12" fill="none" stroke="#6B7A82" stroke-width="2.4"/>
+       <!-- soft tail -->
+       <path d="M104 60 q30 -2 46 4 q18 8 30 -2 q-6 12 6 18 q-20 8 -40 -2 q-22 -10 -42 -6z" fill="#C8881E"/>
+       ${leader(78,46,150,24)}${lbl(154,24,"Eye (tie line here)")}
+       ${leader(90,60,150,46)}${lbl(154,50,"Lead head (the weight)")}
+       ${leader(150,66,170,118)}${lbl(120,132,"Soft body / curly tail")}</svg>`},
+    {id:"worm",name:"Soft plastic worm",use:"Stretchy rubber baits in worm, stick (Senko), or creature shapes. Rigged on a hook, no extra weight needed for a Senko.",
+     tip:"Green pumpkin is the all-around Gaston color. Rig it Texas-style (see above) to fish it weedless.",
+     svg:()=>`<svg class="rig-svg" viewBox="0 0 340 120"><rect width="340" height="120" fill="#FBFAF6"/>
+       <path d="M30 60 q50 -16 110 0 q60 16 120 -4 q20 -4 30 4" fill="none" stroke="#6E7A3A" stroke-width="15" stroke-linecap="round"/>
+       <path d="M30 60 q50 -16 110 0 q60 16 120 -4 q20 -4 30 4" fill="none" stroke="#869149" stroke-width="4" stroke-linecap="round" opacity=".5"/>
+       ${lbl(170,104,"Stretchy rubber — comes in many colors","middle")}</svg>`},
+    {id:"spinner",name:"Spinnerbait",use:"A bent wire with spinning metal blades and a skirted hook. The flash and thump call bass in from a distance.",
+     tip:"Just reel it steadily so the blades spin. Killer in stained water and around the docks.",
+     svg:()=>`<svg class="rig-svg" viewBox="0 0 340 160"><rect width="340" height="160" fill="#FBFAF6"/>
+       <path d="M150 80 L120 40 L210 38" fill="none" stroke="#6B7A82" stroke-width="2.6"/>
+       <ellipse cx="170" cy="38" rx="13" ry="9" fill="#cfd6da" stroke="#9aa0a6"/><ellipse cx="205" cy="38" rx="16" ry="11" fill="#cfd6da" stroke="#9aa0a6"/>
+       ${leader(188,32,200,14)}${lbl(204,16,"Blades (flash)")}
+       <line x1="150" y1="80" x2="120" y2="120" stroke="#6B7A82" stroke-width="2.6"/>
+       <circle cx="150" cy="80" r="6" fill="#6B7A82"/>${leader(150,80,250,70)}${lbl(254,72,"Line ties here")}
+       <path d="M118 118 q-10 22 6 24" fill="none" stroke="#6B7A82" stroke-width="2.4"/>
+       <path d="M110 116 q-14 18 -2 30 q-18 2 -10 18 M122 116 q-2 20 -16 28" fill="none" stroke="#1C5E57" stroke-width="2"/>
+       ${leader(108,128,250,128)}${lbl(254,130,"Skirt + hook")}</svg>`},
+    {id:"crank",name:"Crankbait",use:"A hard, fish-shaped lure with a plastic lip up front. The lip makes it dive and wobble when you reel.",
+     tip:"Bigger/longer lip = dives deeper. A short 'squarebill' lip stays shallow — perfect bouncing off dock pilings.",
+     svg:()=>`<svg class="rig-svg" viewBox="0 0 340 140"><rect width="340" height="140" fill="#FBFAF6"/>
+       <path d="M150 70 q40 -26 100 0 q-40 26 -100 0z" fill="#7aa6c4" stroke="#4f7c99"/>
+       <circle cx="228" cy="62" r="4" fill="#fff" stroke="#4f7c99"/><circle cx="228" cy="62" r="1.6" fill="#1E2622"/>
+       <path d="M150 70 l-22 -16 l-4 30 z" fill="#cfd6da" stroke="#9aa0a6"/>
+       ${leader(132,58,150,22)}${lbl(154,24,"Diving lip = depth")}
+       <path d="M185 92 l-6 14 m12 -14 l6 14" stroke="#6B7A82" stroke-width="2"/><path d="M248 90 l-6 14 m12 -14 l6 14" stroke="#6B7A82" stroke-width="2"/>
+       ${leader(214,100,230,128)}${lbl(234,130,"Treble hooks")}</svg>`},
+    {id:"topwater",name:"Topwater",use:"Floating lures that stay on the surface. A 'popper' has a cupped mouth that splashes; a 'walker' zig-zags.",
+     tip:"Best at dawn and dusk. When a bass explodes on it, wait a beat before you set — let them take it down.",
+     svg:()=>`<svg class="rig-svg" viewBox="0 0 340 130"><rect width="340" height="130" fill="#FBFAF6"/>
+       <rect x="0" y="74" width="340" height="56" fill="#EAF1EF"/>
+       <path d="M150 64 q44 -16 96 0 q-10 8 0 16 q-44 14 -96 0z" fill="#2f6f7a" stroke="#1f4f57"/>
+       <path d="M150 64 q-6 8 0 16 q8 -8 0 -16z" fill="#fff" stroke="#1f4f57"/>
+       ${leader(150,60,130,28)}${lbl(126,28,"Cupped mouth (pops)","end")}
+       <path d="M196 80 l-6 14 m12 -14 l6 14M244 78 l-6 14 m12 -14 l6 14" stroke="#6B7A82" stroke-width="2"/>
+       <text x="300" y="122" font-size="10" fill="#5A675F" text-anchor="end" font-family="-apple-system,Helvetica,Arial">floats on surface</text></svg>`},
+    {id:"sinkers",name:"Sinkers & weights",use:"Lead weights that get your bait down. Three you'll see most in the box:",
+     tip:"Split shot pinches right onto the line. Bullet weights are for Texas rigs. Egg sinkers are for bottom rigs.",
+     svg:()=>`<svg class="rig-svg" viewBox="0 0 340 130"><rect width="340" height="130" fill="#FBFAF6"/>
+       <circle cx="60" cy="55" r="16" fill="#8A8F94"/><path d="M44 55h32" stroke="#5d6266" stroke-width="2"/>
+       ${lbl(60,95,"Split shot","middle")}
+       <path d="M150 40 l26 12 l-26 12 z" fill="#7A8087"/><circle cx="150" cy="52" r="3" fill="#FBFAF6"/>
+       ${lbl(165,95,"Bullet weight","middle")}
+       <ellipse cx="265" cy="52" rx="20" ry="13" fill="#7A8087"/><circle cx="265" cy="52" r="3" fill="#FBFAF6"/>
+       ${lbl(265,95,"Egg sinker","middle")}</svg>`},
+    {id:"terminal",name:"Hooks & swivels",use:"The small connecting hardware. A circle hook is best for catfish (it hooks the corner of the mouth on its own). A swivel stops line twist.",
+     tip:"With a circle hook, don't yank to set — just reel and let the hook find the jaw.",
+     svg:()=>`<svg class="rig-svg" viewBox="0 0 340 140"><rect width="340" height="140" fill="#FBFAF6"/>
+       <path d="M55 30 q0 0 0 0 M55 30 v34 q0 22 -20 22 q-20 0 -20 -16 q0 -8 8 -8" fill="none" stroke="#6B7A82" stroke-width="2.6"/><circle cx="55" cy="28" r="5" fill="none" stroke="#6B7A82" stroke-width="2"/>
+       ${lbl(40,108,"Bait hook (J)","middle")}
+       <path d="M150 30 v26 q0 30 -24 30 q-22 0 -22 -20 q0 -14 18 -10" fill="none" stroke="#6B7A82" stroke-width="2.6"/><circle cx="150" cy="28" r="5" fill="none" stroke="#6B7A82" stroke-width="2"/>
+       ${lbl(140,108,"Circle hook","middle")}
+       <rect x="250" y="44" width="30" height="14" rx="7" fill="#9aa0a6"/><circle cx="248" cy="51" r="7" fill="none" stroke="#6B7A82" stroke-width="2.4"/><circle cx="282" cy="51" r="7" fill="none" stroke="#6B7A82" stroke-width="2.4"/>
+       ${lbl(265,108,"Barrel swivel","middle")}</svg>`}
+  ]}
 ];
 
 /* ============================ STATE ============================ */
 let sel = { season:"spring", spot:"dock", time:"dawn", sky:"clear" };
-let formSel = { who:"Me", spot:"Dock" };
+let formSel = { who:"Me", spot:"Dock", photo:null };
 let anglers = JSON.parse(Store.get("gc_anglers") || '["Me","Patrick"]');
+(function(){ const m=new Date().getMonth(); const s=SEASONS.find(s=>s.months.includes(m)); if(s) sel.season=s.v; })();
 
-// auto-detect current season
-(function(){
-  const m = new Date().getMonth();
-  const s = SEASONS.find(s=>s.months.includes(m));
-  if(s) sel.season = s.v;
-})();
-
-/* ============================ RENDER: TODAY ============================ */
+/* ============================ TODAY ============================ */
 function renderSeasonChips(){
-  const c = document.getElementById("q-season");
-  c.innerHTML = SEASONS.map(s=>`<button class="chip ${s.v===sel.season?'on':''}" data-v="${s.v}">${s.label}</button>`).join("");
-  bindChips(c, v=>sel.season=v);
+  const c=document.getElementById("q-season");
+  c.innerHTML=SEASONS.map(s=>`<button class="chip ${s.v===sel.season?'on':''}" data-v="${s.v}">${s.label}</button>`).join("");
+  bindChips(c,v=>sel.season=v);
 }
-function bindChips(container, cb){
+function bindChips(container,cb){
   container.querySelectorAll(".chip").forEach(ch=>{
-    ch.onclick=()=>{
-      container.querySelectorAll(".chip").forEach(x=>x.classList.remove("on"));
-      ch.classList.add("on");
-      cb(ch.dataset.v);
-    };
+    ch.onclick=()=>{ container.querySelectorAll(".chip").forEach(x=>x.classList.remove("on")); ch.classList.add("on"); cb(ch.dataset.v); };
   });
 }
-
 function recommend(){
-  // score each fish for the chosen conditions
-  const scored = FISH.map(f=>{
-    let s = 0;
-    const seasonRank = f.season[sel.season];
-    s += seasonRank==="hot"?5 : seasonRank==="ok"?2 : 0;
-    if(f.tags.includes(sel.spot)) s += 3; else s -= 2;
-    if(sel.time==="night"){ if(f.id==="catfish") s+=4; if(f.id==="largemouth"||f.id==="crappie") s+=1; if(["striper","bream","whiteperch"].includes(f.id)) s-=2; }
-    if(sel.time==="dawn"){ if(["largemouth","striper","crappie"].includes(f.id)) s+=3; }
-    if(sel.time==="day"){ if(["bream","catfish","whiteperch"].includes(f.id)) s+=2; if(["striper","largemouth"].includes(f.id)) s-=1; }
+  const scored=FISH.map(f=>{
+    let s=0; const r=f.season[sel.season];
+    s += r==="hot"?5 : r==="ok"?2 : 0;
+    if(f.tags.includes(sel.spot)) s+=3; else s-=2;
+    if(sel.time==="night"){ if(f.id==="catfish")s+=4; if(f.id==="largemouth"||f.id==="crappie")s+=1; if(["striper","bream","whiteperch"].includes(f.id))s-=2; }
+    if(sel.time==="dawn"){ if(["largemouth","striper","crappie"].includes(f.id))s+=3; }
+    if(sel.time==="day"){ if(["bream","catfish","whiteperch"].includes(f.id))s+=2; if(["striper","largemouth"].includes(f.id))s-=1; }
     if(sel.sky==="cloud" && ["largemouth","striper"].includes(f.id)) s+=2;
-    if(sel.sky==="front") s-=2; // tough bite after a front
-    return {f, s};
+    if(sel.sky==="front") s-=2;
+    return {f,s};
   }).sort((a,b)=>b.s-a.s);
-
-  const out = document.getElementById("recOut");
-  const top = scored.slice(0,2);
-  const seasonLabel = SEASONS.find(x=>x.v===sel.season).label;
-  const spotLabel = sel.spot==="dock"?"off the dock":"from the boat";
-  const timeLabel = {dawn:"at dawn or dusk",day:"midday",night:"at night"}[sel.time];
-
-  let tip = "";
-  if(sel.sky==="front") tip = "A cold front just passed, so expect a tough, tight-lipped bite. Slow down, downsize your bait, and fish cover thoroughly.";
-  else if(sel.spot==="dock") tip = "From the dock, work the shade of the pilings and skip baits underneath — that's where fish hold.";
-  else tip = "From the boat, use your electronics to find bait and structure first, then fish to it. Cover water until you find an active school.";
-
-  out.innerHTML = `
-    <div class="card">
-      <div class="eyebrow">Game plan · ${seasonLabel}, ${timeLabel}</div>
-      ${top.map((t,i)=>recBlock(t.f,i)).join('<div class="divider-mini"></div>')}
-      <div class="rec-tip">💡 ${tip}</div>
-    </div>`;
+  const out=document.getElementById("recOut"); const top=scored.slice(0,2);
+  const seasonLabel=SEASONS.find(x=>x.v===sel.season).label;
+  const timeLabel={dawn:"at dawn or dusk",day:"midday",night:"at night"}[sel.time];
+  let tip;
+  if(sel.sky==="front") tip="A cold front just passed, so expect a tough, tight-lipped bite. Slow down, downsize your bait, and fish cover thoroughly.";
+  else if(sel.spot==="dock") tip="From the dock, work the shade of the pilings and skip baits underneath — that's where fish hold.";
+  else tip="From the boat, use your electronics to find bait and structure first, then fish to it. Cover water until you find an active school.";
+  out.innerHTML=`<div class="card"><div class="eyebrow">Game plan · ${seasonLabel}, ${timeLabel}</div>
+    ${top.map((t,i)=>recBlock(t.f,i)).join('<div class="divider-mini"></div>')}
+    <div class="rec-tip">💡 ${tip}</div></div>`;
   out.scrollIntoView({behavior:"smooth",block:"nearest"});
 }
 function recBlock(f,i){
-  return `<div class="${i===1?'rank2':''}">
-    <div class="rec-target">
-      ${fishIcon(f.color)}
-      <div>
-        <h3>${i===0?'Target: ':'Backup: '}${f.name}</h3>
-        <div class="why">${i===0?'Best match for these conditions':'Solid second option'}</div>
-      </div>
-    </div>
-    <div class="pill-row">${f.baits.slice(0,3).map(b=>`<span class="pill">${b}</span>`).join("")}</div>
-  </div>`;
+  return `<div class="${i===1?'rank2':''}"><div class="rec-target">${fishIcon(f.color)}
+    <div><h3>${i===0?'Target: ':'Backup: '}${f.name}</h3><div class="why">${i===0?'Best match for these conditions':'Solid second option'}</div></div></div>
+    <div class="pill-row">${f.baits.slice(0,3).map(b=>`<span class="pill">${b}</span>`).join("")}</div></div>`;
 }
 
-/* ============================ RENDER: FISH ============================ */
+/* ============================ FISH ============================ */
 function renderFish(){
-  const seasonOrder = ["spring","summer","fall","winter"];
-  const seasonLab = {spring:"Spr",summer:"Sum",fall:"Fall",winter:"Win"};
-  document.getElementById("fishList").innerHTML = FISH.map(f=>`
+  const order=["spring","summer","fall","winter"]; const lab={spring:"Spr",summer:"Sum",fall:"Fall",winter:"Win"};
+  document.getElementById("fishList").innerHTML=FISH.map(f=>`
     <div class="card fish-card" data-id="${f.id}">
-      <div class="fish-head">
-        ${fishIcon(f.color)}
-        <div style="flex:1;min-width:0">
-          <h3>${f.name}</h3>
-          <div class="tagline">${f.tagline}</div>
-        </div>
-        <svg class="chev" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
-      </div>
+      <div class="fish-head">${fishIcon(f.color)}
+        <div style="flex:1;min-width:0"><h3>${f.name}</h3><div class="tagline">${f.tagline}</div></div>
+        <svg class="chev" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
       <div class="tagrow">
         ${f.tags.includes("dock")?'<span class="tag dock">Dock</span>':''}
         ${f.tags.includes("boat")?'<span class="tag boat">Boat</span>':''}
-        ${f.tags.includes("kid")?'<span class="tag kid">Kid-friendly</span>':''}
-      </div>
+        ${f.tags.includes("kid")?'<span class="tag kid">Kid-friendly</span>':''}</div>
       <div class="fish-body">
         <div class="subhead">When they bite</div>
-        <div class="seasongrid">
-          ${seasonOrder.map(s=>{
-            const r=f.season[s];
-            const cls=r==="hot"?"s-hot":r==="ok"?"s-ok":"s-slow";
-            return `<div class="seasonbox ${cls}">${seasonLab[s]}</div>`;
-          }).join("")}
-        </div>
-        <div class="subhead">Best baits</div>
-        <ul>${f.baits.map(b=>`<li>${b}</li>`).join("")}</ul>
-        <div class="subhead">Where to find them</div>
-        <p>${f.where}</p>
-        <div class="subhead">Season by season</div>
-        <p>${f.seasonNotes}</p>
-        <div class="subhead">Prime time</div>
-        <p>${f.best}</p>
-      </div>
-    </div>`).join("");
-  document.querySelectorAll(".fish-card").forEach(c=>{
+        <div class="seasongrid">${order.map(s=>{const r=f.season[s];const cls=r==="hot"?"s-hot":r==="ok"?"s-ok":"s-slow";return `<div class="seasonbox ${cls}">${lab[s]}</div>`;}).join("")}</div>
+        <div class="subhead">Best baits</div><ul>${f.baits.map(b=>`<li>${b}</li>`).join("")}</ul>
+        <div class="seerig" data-rig="${f.rigs[0]}">🪝 See what these rigs look like →</div>
+        <div class="subhead">Where to find them</div><p>${f.where}</p>
+        <div class="subhead">Season by season</div><p>${f.seasonNotes}</p>
+        <div class="subhead">Prime time</div><p>${f.best}</p>
+      </div></div>`).join("");
+  document.querySelectorAll("#fishList .fish-card").forEach(c=>{
     c.querySelector(".fish-head").onclick=()=>c.classList.toggle("open");
+    const sr=c.querySelector(".seerig");
+    if(sr) sr.onclick=(e)=>{ e.stopPropagation(); show("rigs"); const id=sr.dataset.rig;
+      setTimeout(()=>{ const el=document.getElementById("rig-"+id); if(el){ el.scrollIntoView({behavior:"smooth",block:"center"}); el.style.outline="2px solid var(--brass)"; setTimeout(()=>el.style.outline="",1600);} },120); };
   });
 }
 
-/* ============================ RENDER: KNOTS ============================ */
+/* ============================ RIGS ============================ */
+function renderRigs(){
+  document.getElementById("rigList").innerHTML=RIGS.map(g=>`
+    <div class="group-label">${g.group}</div>
+    ${g.items.map(it=>`<div class="card rig-card" id="rig-${it.id}" style="transition:outline .2s">
+      <h3>${it.name}</h3><p class="use">${it.use}</p>
+      ${it.svg()}
+      <div class="rig-tip">💡 ${it.tip}</div>
+    </div>`).join("")}`).join("");
+}
+
+/* ============================ KNOTS ============================ */
 function knotSvg(){
   return `<svg class="knot-svg" viewBox="0 0 300 90" preserveAspectRatio="xMidYMid meet">
     <path d="M10 45 C 70 45, 90 20, 130 45 C 160 65, 175 25, 205 45" fill="none" stroke="#C8881E" stroke-width="3.5" stroke-linecap="round"/>
     <circle cx="240" cy="45" r="14" fill="none" stroke="#1C5E57" stroke-width="4"/>
     <path d="M205 45 C 215 45, 225 45, 226 45" fill="none" stroke="#C8881E" stroke-width="3.5"/>
-    <path d="M254 38 l16 -8 v 30 l-16 -8" fill="#1C5E57" opacity=".5"/>
-  </svg>`;
+    <path d="M254 38 l16 -8 v 30 l-16 -8" fill="#1C5E57" opacity=".5"/></svg>`;
 }
 function renderKnots(){
-  document.getElementById("knotList").innerHTML = KNOTS.map(k=>`
-    <div class="card knot-card fish-card" data-id="${k.id}">
-      <div class="fish-head">
-        <div style="flex:1;min-width:0">
-          <h3>${k.name}</h3>
-          <div class="knot-meta">Strength <span class="stars">${"●".repeat(k.stars)}${"○".repeat(5-k.stars)}</span></div>
-        </div>
-        <svg class="chev" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
-      </div>
-      <div class="fish-body">
-        ${knotSvg()}
+  document.getElementById("knotList").innerHTML=KNOTS.map(k=>`
+    <div class="card fish-card" data-id="${k.id}">
+      <div class="fish-head"><div style="flex:1;min-width:0"><h3>${k.name}</h3>
+        <div class="knot-meta">Strength <span class="stars">${"●".repeat(k.stars)}${"○".repeat(5-k.stars)}</span></div></div>
+        <svg class="chev" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+      <div class="fish-body">${knotSvg()}
         <div class="best-for"><strong>Use it for:</strong> ${k.for}</div>
-        <ol class="steps">${k.steps.map(s=>`<li>${s}</li>`).join("")}</ol>
-      </div>
-    </div>`).join("");
-  document.querySelectorAll("#knotList .fish-card").forEach(c=>{
-    c.querySelector(".fish-head").onclick=()=>c.classList.toggle("open");
-  });
+        <ol class="steps">${k.steps.map(s=>`<li>${s}</li>`).join("")}</ol></div></div>`).join("");
+  document.querySelectorAll("#knotList .fish-card").forEach(c=>{ c.querySelector(".fish-head").onclick=()=>c.classList.toggle("open"); });
 }
 
-/* ============================ RENDER: GEAR ============================ */
+/* ============================ GEAR ============================ */
 function renderGear(){
-  document.getElementById("gearList").innerHTML = GEAR.map(g=>`
-    <div class="card gear-card ${g.kid?'':''}">
-      <h3>${g.icon} ${g.name}</h3>
-      <div class="for">${g.forwho}</div>
-      ${g.specs.map(([k,v])=>`<div class="spec"><span class="k">${k}</span><span class="v">${v}</span></div>`).join("")}
-    </div>`).join("") + `
-    <div class="kidnote">
-      <strong>Fishing with Patrick?</strong> Keep sessions short and the action constant. Start him on bream or crappie off the dock with a bobber and a worm — visible bites and frequent catches keep a kid hooked. Bring snacks, let him reel everything in, and quit while he still wants more.
-    </div>`;
+  document.getElementById("gearList").innerHTML=GEAR.map(g=>`
+    <div class="card gear-card"><h3>${g.icon} ${g.name}</h3><div class="for">${g.forwho}</div>
+    ${g.specs.map(([k,v])=>`<div class="spec"><span class="k">${k}</span><span class="v">${v}</span></div>`).join("")}</div>`).join("")
+    + `<div class="kidnote"><strong>Fishing with Patrick?</strong> Keep sessions short and the action constant. Start him on bream or crappie off the dock with a bobber and a worm — visible bites and frequent catches keep a kid hooked. Bring snacks, let him reel everything in, and quit while he still wants more.</div>`;
 }
 
-/* ============================ RENDER: LOG ============================ */
+/* ============================ LOG ============================ */
 function getCatches(){ try{ return JSON.parse(Store.get("gc_catches")||"[]"); }catch(e){ return []; } }
 function saveCatches(a){ Store.set("gc_catches", JSON.stringify(a)); }
 
+function renderLeaderboard(){
+  const el=document.getElementById("leaderboard"); if(!el) return;
+  const list=getCatches(); const by={};
+  list.forEach(c=>{ const a=c.who||"—"; if(!by[a]) by[a]={name:a,count:0,big:0}; by[a].count++; const L=parseFloat(c.len)||0; if(L>by[a].big) by[a].big=L; });
+  const arr=Object.values(by);
+  if(arr.length<2){ el.innerHTML=""; return; }
+  const topC=Math.max(...arr.map(a=>a.count)), topB=Math.max(...arr.map(a=>a.big));
+  arr.sort((a,b)=> b.count-a.count || b.big-a.big);
+  el.innerHTML=`<div class="card lb-card"><div class="lb-title">🏆 Leaderboard</div>`+
+    arr.map(a=>`<div class="lb-row"><span class="lb-name">${a.name}</span>`+
+      `<span class="lb-c">${a.count} ${a.count===1?'catch':'catches'}${a.count===topC?' 🏆':''}</span>`+
+      `<span class="lb-b">${a.big?('biggest '+a.big+'″'+(a.big===topB&&topB>0?' 📏':'')):'—'}</span></div>`).join("")+
+    `</div>`;
+}
+
 function renderLog(){
-  const list = getCatches();
-  // stats
-  const total = list.length;
-  let biggest = "—", topBait = "—";
+  renderLeaderboard();
+  const list=getCatches(); const total=list.length;
+  let biggest="—",topBait="—";
   if(total){
-    const withLen = list.filter(c=>c.len);
-    if(withLen.length){ const b=withLen.reduce((a,c)=>+c.len>+a.len?c:a); biggest = b.len+'"'; }
+    const wl=list.filter(c=>c.len); if(wl.length){ const b=wl.reduce((a,c)=>+c.len>+a.len?c:a); biggest=b.len+'"'; }
     const counts={}; list.forEach(c=>{ if(c.bait) counts[c.bait]=(counts[c.bait]||0)+1; });
-    const keys=Object.keys(counts);
-    if(keys.length){ topBait = keys.reduce((a,b)=>counts[b]>counts[a]?b:a); }
+    const keys=Object.keys(counts); if(keys.length) topBait=keys.reduce((a,b)=>counts[b]>counts[a]?b:a);
   }
-  document.getElementById("stats").innerHTML = `
+  document.getElementById("stats").innerHTML=`
     <div class="stat"><div class="num">${total}</div><div class="lab">Catches</div></div>
     <div class="stat"><div class="num">${biggest}</div><div class="lab">Longest</div></div>
-    <div class="stat"><div class="num" style="font-size:.92rem;line-height:1.2">${topBait==="—"?"—":topBait}</div><div class="lab">Top bait</div></div>`;
-
-  const cl = document.getElementById("catchList");
+    <div class="stat"><div class="num" style="font-size:.92rem;line-height:1.2">${topBait}</div><div class="lab">Top bait</div></div>`;
+  const cl=document.getElementById("catchList");
   if(!total){
-    cl.innerHTML = `<div class="card empty">
-      <svg viewBox="0 0 100 60" fill="#1C5E57"><path d="M12 30c10-18 38-18 50 0-12 18-40 18-50 0z"/><path d="M62 30l22-14v28z"/></svg>
-      <div>No catches logged yet.<br>Land one and tap <strong>+ Log a catch</strong>.</div>
-    </div>`;
-    return;
+    cl.innerHTML=`<div class="card empty"><svg viewBox="0 0 100 60" fill="#1C5E57"><path d="M12 30c10-18 38-18 50 0-12 18-40 18-50 0z"/><path d="M62 30l22-14v28z"/></svg>
+      <div>No catches logged yet.<br>Land one and tap <strong>+ Log a catch</strong>.</div></div>`; return;
   }
-  cl.innerHTML = `<div class="card" style="padding:6px 16px">` + list.map((c,idx)=>{
-    const f = FISH.find(x=>x.id===c.speciesId) || {color:"#5A675F"};
-    const det = [c.len?c.len+'"':null, c.wt?c.wt+' lb':null, c.bait, c.spot].filter(Boolean).join(" · ");
-    return `<div class="catch">
-      ${fishIcon(f.color)}
-      <div class="meta">
-        <div class="top"><span class="sp">${c.species}</span><span class="dt">${c.date}</span></div>
-        <div class="det">${det||"—"}</div>
-        ${c.notes?`<div class="det" style="margin-top:2px">"${c.notes}"</div>`:""}
-        <span class="who">${c.who}</span>
-      </div>
-      <button class="del" data-i="${idx}" aria-label="Delete">×</button>
-    </div>`;
-  }).join("") + `</div>`;
-
-  cl.querySelectorAll(".del").forEach(b=>{
-    b.onclick=()=>{ const a=getCatches(); a.splice(+b.dataset.i,1); saveCatches(a); renderLog(); toast("Catch removed"); };
-  });
+  cl.innerHTML=`<div class="card" style="padding:6px 16px">`+list.map((c,idx)=>{
+    const f=FISH.find(x=>x.id===c.speciesId)||{color:"#5A675F"};
+    const det=[c.len?c.len+'"':null,c.wt?c.wt+' lb':null,c.bait,c.spot].filter(Boolean).join(" · ");
+    const left=c.photo?`<img class="thumb" src="${c.photo}" data-photo="${idx}" alt="catch">`:fishIcon(f.color).replace('class="fishicon"','class="fishicon ci"');
+    return `<div class="catch">${left}
+      <div class="meta"><div class="top"><span class="sp">${c.species}</span><span class="dt">${c.date}</span></div>
+        <div class="det">${det||"—"}</div>${c.notes?`<div class="det" style="margin-top:2px">"${c.notes}"</div>`:""}
+        <span class="who">${c.who}</span></div>
+      <button class="del" data-i="${idx}" aria-label="Delete">×</button></div>`;
+  }).join("")+`</div>`;
+  cl.querySelectorAll(".del").forEach(b=>{ b.onclick=()=>{ const a=getCatches(); a.splice(+b.dataset.i,1); saveCatches(a); renderLog(); toast("Catch removed"); }; });
+  cl.querySelectorAll(".thumb").forEach(t=>{ t.onclick=()=>openLightbox(t.src); });
 }
+
+/* photo handling */
+function compressPhoto(file,cb){
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const img=new Image();
+    img.onload=()=>{
+      const max=1000; let w=img.width,h=img.height;
+      if(w>h&&w>max){ h=Math.round(h*max/w); w=max; } else if(h>max){ w=Math.round(w*max/h); h=max; }
+      const cv=document.createElement("canvas"); cv.width=w; cv.height=h;
+      cv.getContext("2d").drawImage(img,0,0,w,h);
+      cb(cv.toDataURL("image/jpeg",0.7));
+    };
+    img.onerror=()=>cb(null);
+    img.src=e.target.result;
+  };
+  reader.onerror=()=>cb(null);
+  reader.readAsDataURL(file);
+}
+
+/* lightbox */
+function openLightbox(src){ document.getElementById("lbImg").src=src; document.getElementById("lightbox").classList.add("on"); }
+function closeLightbox(){ document.getElementById("lightbox").classList.remove("on"); }
 
 /* sheet */
 function openSheet(){
-  // who chips
-  const who = document.getElementById("f-who");
-  who.innerHTML = anglers.map((a,i)=>`<button class="chip ${i===0?'on':''}" data-v="${a}">${a}</button>`).join("")+
-    `<button class="chip" data-v="__add" style="border-style:dashed">+ Add</button>`;
-  formSel.who = anglers[0];
+  const who=document.getElementById("f-who");
+  who.innerHTML=anglers.map((a,i)=>`<button class="chip ${i===0?'on':''}" data-v="${a}">${a}</button>`).join("")+`<button class="chip" data-v="__add" style="border-style:dashed">+ Add</button>`;
+  formSel.who=anglers[0]; formSel.photo=null;
   who.querySelectorAll(".chip").forEach(ch=>{
     ch.onclick=()=>{
-      if(ch.dataset.v==="__add"){
-        const n=prompt("Who's fishing? (name)");
-        if(n && n.trim()){ anglers.push(n.trim()); Store.set("gc_anglers",JSON.stringify(anglers)); openSheet(); }
-        return;
-      }
-      who.querySelectorAll(".chip").forEach(x=>x.classList.remove("on"));
-      ch.classList.add("on"); formSel.who=ch.dataset.v;
+      if(ch.dataset.v==="__add"){ const n=prompt("Who's fishing? (name)"); if(n&&n.trim()){ anglers.push(n.trim()); Store.set("gc_anglers",JSON.stringify(anglers)); openSheet(); } return; }
+      who.querySelectorAll(".chip").forEach(x=>x.classList.remove("on")); ch.classList.add("on"); formSel.who=ch.dataset.v;
     };
   });
-  // species
-  document.getElementById("f-species").innerHTML = FISH.map(f=>`<option value="${f.id}">${f.name}</option>`).join("");
-  // spot
-  const sp=document.getElementById("f-spot"); formSel.spot="Dock";
-  bindChips(sp, v=>formSel.spot=v);
+  document.getElementById("f-species").innerHTML=FISH.map(f=>`<option value="${f.id}">${f.name}</option>`).join("");
+  const sp=document.getElementById("f-spot"); formSel.spot="Dock"; bindChips(sp,v=>formSel.spot=v);
   sp.querySelectorAll(".chip").forEach((c,i)=>c.classList.toggle("on",i===0));
-  // clear
   ["f-len","f-wt","f-bait","f-notes"].forEach(id=>document.getElementById(id).value="");
+  document.getElementById("f-photo").value="";
+  document.getElementById("photoPrev").classList.remove("show");
   document.getElementById("sheetBg").classList.add("on");
 }
 function closeSheet(){ document.getElementById("sheetBg").classList.remove("on"); }
 
 function saveCatch(){
-  const sid = document.getElementById("f-species").value;
-  const f = FISH.find(x=>x.id===sid);
-  const c = {
-    speciesId:sid, species:f.name, who:formSel.who, spot:formSel.spot,
-    len:document.getElementById("f-len").value.trim(),
-    wt:document.getElementById("f-wt").value.trim(),
-    bait:document.getElementById("f-bait").value.trim(),
-    notes:document.getElementById("f-notes").value.trim(),
-    date:new Date().toLocaleDateString(undefined,{month:"short",day:"numeric"})
-  };
-  const a=getCatches(); a.unshift(c); saveCatches(a);
+  const sid=document.getElementById("f-species").value; const f=FISH.find(x=>x.id===sid);
+  const c={ speciesId:sid, species:f.name, who:formSel.who, spot:formSel.spot,
+    len:document.getElementById("f-len").value.trim(), wt:document.getElementById("f-wt").value.trim(),
+    bait:document.getElementById("f-bait").value.trim(), notes:document.getElementById("f-notes").value.trim(),
+    photo:formSel.photo, date:new Date().toLocaleDateString(undefined,{month:"short",day:"numeric"}) };
+  const a=getCatches(); a.unshift(c);
+  try{ saveCatches(a); }
+  catch(e){ toast("Storage full — try removing a photo or two"); return; }
   closeSheet(); renderLog(); toast("Catch logged! 🎣");
 }
 
-/* ============================ NAV + INIT ============================ */
+/* nav + init */
 function show(view){
   document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===view));
   document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("on",t.dataset.view===view));
   window.scrollTo({top:0,behavior:"instant"});
 }
 document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>show(t.dataset.view));
-
 let toastT;
-function toast(msg){
-  const el=document.getElementById("toast"); el.textContent=msg; el.classList.add("show");
-  clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove("show"),1900);
-}
+function toast(msg){ const el=document.getElementById("toast"); el.textContent=msg; el.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove("show"),1900); }
 
-// today bindings
 renderSeasonChips();
-bindChips(document.getElementById("q-spot"), v=>sel.spot=v);
-bindChips(document.getElementById("q-time"), v=>sel.time=v);
-bindChips(document.getElementById("q-sky"), v=>sel.sky=v);
+bindChips(document.getElementById("q-spot"),v=>sel.spot=v);
+bindChips(document.getElementById("q-time"),v=>sel.time=v);
+bindChips(document.getElementById("q-sky"),v=>sel.sky=v);
 document.getElementById("recBtn").onclick=recommend;
+renderFish(); renderRigs(); renderKnots(); renderGear(); renderLog();
+loadWeather();
 
-// other tabs
-renderFish(); renderKnots(); renderGear(); renderLog();
-
-// log sheet
 document.getElementById("addCatchBtn").onclick=openSheet;
 document.getElementById("saveCatch").onclick=saveCatch;
 document.getElementById("cancelCatch").onclick=closeSheet;
 document.getElementById("sheetBg").onclick=(e)=>{ if(e.target.id==="sheetBg") closeSheet(); };
 
-// footnote re: storage
+document.getElementById("f-photo").onchange=function(){
+  const file=this.files&&this.files[0]; if(!file) return;
+  toast("Adding photo…");
+  compressPhoto(file,(data)=>{
+    if(!data){ toast("Couldn't read that photo"); return; }
+    formSel.photo=data;
+    document.getElementById("photoPrevImg").src=data;
+    document.getElementById("photoPrev").classList.add("show");
+  });
+};
+document.getElementById("photoRm").onclick=()=>{ formSel.photo=null; document.getElementById("f-photo").value=""; document.getElementById("photoPrev").classList.remove("show"); };
+document.getElementById("lbClose").onclick=closeLightbox;
+document.getElementById("lightbox").onclick=(e)=>{ if(e.target.id==="lightbox") closeLightbox(); };
+
+/* ============================ WEATHER — Lake Gaston ============================ */
+const LG = { lat:36.51, lon:-77.94 };
+function compass(deg){ return ["N","NE","E","SE","S","SW","W","NW"][Math.round((((deg%360)+360)%360)/45)%8]; }
+function wxCode(c){
+  const m={0:["☀️","Clear"],1:["🌤️","Mostly clear"],2:["⛅","Partly cloudy"],3:["☁️","Overcast"],
+    45:["🌫️","Fog"],48:["🌫️","Fog"],51:["🌦️","Light drizzle"],53:["🌦️","Drizzle"],55:["🌦️","Drizzle"],
+    61:["🌧️","Light rain"],63:["🌧️","Rain"],65:["🌧️","Heavy rain"],66:["🌧️","Freezing rain"],67:["🌧️","Freezing rain"],
+    71:["🌨️","Light snow"],73:["🌨️","Snow"],75:["🌨️","Heavy snow"],77:["🌨️","Snow"],
+    80:["🌦️","Showers"],81:["🌦️","Showers"],82:["⛈️","Heavy showers"],85:["🌨️","Snow showers"],86:["🌨️","Snow showers"],
+    95:["⛈️","Thunderstorm"],96:["⛈️","Thunderstorm"],99:["⛈️","Thunderstorm"]};
+  return m[c]||["🌡️","—"];
+}
+function fmtTime(iso){ try{ const d=new Date(iso); let h=d.getHours(),mn=d.getMinutes(); const ap=h>=12?'p':'a'; h=h%12||12; return h+":"+String(mn).padStart(2,'0')+ap; }catch(e){ return "—"; } }
+function setSky(v){ const c=document.getElementById("q-sky"); if(!c) return; c.querySelectorAll(".chip").forEach(ch=>ch.classList.toggle("on",ch.dataset.v===v)); sel.sky=v; }
+
+function renderWx(data,stale){
+  const cur=data.current; const [emoji,text]=wxCode(cur.weather_code);
+  const tempF=Math.round(cur.temperature_2m), feels=Math.round(cur.apparent_temperature);
+  const wind=Math.round(cur.wind_speed_10m), gust=Math.round(cur.wind_gusts_10m||0), dir=compass(cur.wind_direction_10m);
+  const inHg=cur.surface_pressure*0.02953;
+  let arrow="→",diff=0;
+  try{ const ht=data.hourly.time,hp=data.hourly.surface_pressure; const nowH=cur.time.slice(0,13);
+    let idx=ht.findIndex(t=>t.slice(0,13)===nowH); if(idx<0) idx=ht.length-1; const past=Math.max(0,idx-3);
+    diff=hp[idx]-hp[past]; if(diff<=-1.0)arrow="↓"; else if(diff>=1.0)arrow="↑"; }catch(e){}
+  let sr="—",ss="—",lowLight=false;
+  try{ sr=fmtTime(data.daily.sunrise[0]); ss=fmtTime(data.daily.sunset[0]);
+    const now=new Date(cur.time),rise=new Date(data.daily.sunrise[0]),set=new Date(data.daily.sunset[0]);
+    lowLight=Math.abs(now-rise)<=75*60000||Math.abs(now-set)<=75*60000; }catch(e){}
+  let score=0;
+  if(diff<=-1.0)score+=2; else if(diff<=-0.3)score+=1; else if(diff>=1.5)score-=2; else if(diff>=0.5)score-=1;
+  if(cur.cloud_cover>=40&&cur.cloud_cover<=92)score+=1;
+  if(wind>=4&&wind<=12)score+=1; else if(wind>18)score-=1;
+  const storm=[95,96,99,82].includes(cur.weather_code); if(storm)score-=3; if(lowLight)score+=1;
+  let reason;
+  if(storm)reason="Storms around — keep an eye on the sky and stay safe.";
+  else if(diff>=0.5)reason="Pressure's up — fish can get sluggish; slow down and downsize.";
+  else if(diff<=-0.3)reason="Pressure's falling — fish often feed hard ahead of a change.";
+  else if(lowLight)reason="You're in a prime low-light window right now.";
+  else if(cur.cloud_cover>=40&&cur.cloud_cover<=92)reason="Overcast skies keep fish moving and feeding.";
+  else if(wind>=4&&wind<=12)reason="A light breeze is stacking bait on the windblown banks.";
+  else reason="Average conditions — fish the dawn and dusk windows.";
+  let label,cls;
+  if(score>=4){label="Prime";cls="ol-prime";} else if(score>=2){label="Good";cls="ol-good";}
+  else if(score>=0){label="Fair";cls="ol-fair";} else {label="Slow";cls="ol-slow";}
+  setSky((cur.precipitation>0||cur.cloud_cover>=60)?"cloud":"clear");
+  document.getElementById("wxCard").innerHTML=`
+    <div class="wx-top"><div class="wx-temp">${tempF}°<span class="wx-feels">feels ${feels}°</span></div>
+      <div class="wx-cond">${emoji} ${text}</div>
+      <button class="wx-refresh" id="wxRefresh" aria-label="Refresh weather">↻</button></div>
+    <div class="wx-outlook ${cls}"><span class="ol-badge">${label}</span> ${reason}</div>
+    <div class="wx-stats">
+      <div><span class="wxk">Wind</span><span class="wxv">${wind} ${dir}${gust>wind+6?` g${gust}`:''}</span></div>
+      <div><span class="wxk">Pressure</span><span class="wxv">${inHg.toFixed(2)}″ ${arrow}</span></div>
+      <div><span class="wxk">Sun</span><span class="wxv">${sr}–${ss}</span></div></div>
+    <div class="wx-foot">Lake Gaston · ${stale?'last known reading':'updated just now'} · weather by Open-Meteo</div>`;
+  const rb=document.getElementById("wxRefresh"); if(rb) rb.onclick=()=>loadWeather(true);
+  renderBestTimes(data); renderForecast(data);
+}
+function wxError(){
+  document.getElementById("wxCard").innerHTML=`<div class="wx-msg">Couldn't reach the weather service — you may be offline. No worries: the buttons below still work, just set the conditions by hand.<br><button class="wx-retry" id="wxRetry">Try again</button></div>`;
+  const r=document.getElementById("wxRetry"); if(r) r.onclick=()=>loadWeather(true);
+}
+function clk(dt){ let h=dt.getHours(),m=dt.getMinutes(); const ap=h>=12?'p':'a'; h=h%12||12; return h+":"+String(m).padStart(2,'0')+ap; }
+function moonInfo(d){
+  const syn=29.530588853, known=Date.UTC(2000,0,6,18,14,0);
+  let age=(((d.getTime()-known)/86400000)%syn); if(age<0)age+=syn;
+  const illum=Math.round((1-Math.cos(2*Math.PI*age/syn))/2*100);
+  const t=[[1,"New moon","🌑"],[6.4,"Waxing crescent","🌒"],[8.4,"First quarter","🌓"],[13.8,"Waxing gibbous","🌔"],[15.8,"Full moon","🌕"],[21.3,"Waning gibbous","🌖"],[23.3,"Last quarter","🌗"],[28.5,"Waning crescent","🌘"],[30,"New moon","🌑"]];
+  let nm="New moon",em="🌑"; for(const [lim,n,e] of t){ if(age<=lim){ nm=n; em=e; break; } }
+  const strong=age<=2||Math.abs(age-syn/2)<=2;
+  return {illum,name:nm,emoji:em,strong};
+}
+function renderBestTimes(data){
+  const el=document.getElementById("bestTimes"); if(!el) return;
+  let sr,ss; try{ sr=new Date(data.daily.sunrise[0]); ss=new Date(data.daily.sunset[0]); if(isNaN(sr)||isNaN(ss)) throw 0; }catch(e){ el.innerHTML=""; return; }
+  const m=moonInfo(new Date());
+  const dawn=clk(new Date(sr.getTime()-45*60000))+" – "+clk(new Date(sr.getTime()+90*60000));
+  const dusk=clk(new Date(ss.getTime()-90*60000))+" – "+clk(new Date(ss.getTime()+45*60000));
+  el.innerHTML=`<div class="card bt-card">
+    <div class="bt-head"><h3>Best bite times today</h3><div class="bt-moon">${m.emoji} ${m.name}${m.strong?' · <span class="bt-strong">strong day</span>':''}</div></div>
+    <div class="bt-rows">
+      <div class="bt-row"><span class="bt-when">🌅 First light</span><span class="bt-time">${dawn}</span></div>
+      <div class="bt-row"><span class="bt-when">🌇 Last light</span><span class="bt-time">${dusk}</span></div>
+    </div>
+    <div class="bt-note">First and last light are the real feeding windows on Gaston. ${m.strong?('A '+m.name.toLowerCase()+' makes today an especially strong solunar day.'):("Moon is "+m.illum+"% lit ("+m.name.toLowerCase()+").")}</div>
+  </div>`;
+}
+function dayBite(data,i){
+  const d=data.daily; const wc=d.weather_code[i];
+  const windMax=d.wind_speed_10m_max?Math.round(d.wind_speed_10m_max[i]):0;
+  let dir=0;
+  try{
+    const ht=data.hourly.time, hp=data.hourly.surface_pressure;
+    const avg=(ds)=>{ let s=0,n=0; for(let k=0;k<ht.length;k++){ if(ht[k].slice(0,10)===ds){ s+=hp[k]; n++; } } return n?s/n:null; };
+    const a=avg(d.time[i]), b=i>0?avg(d.time[i-1]):null;
+    if(a!=null&&b!=null) dir=a-b;
+  }catch(e){}
+  let score=0;
+  if(dir<=-1.5)score+=2; else if(dir<=-0.5)score+=1; else if(dir>=1.5)score-=2; else if(dir>=0.5)score-=1;
+  const storm=[95,96,99,82].includes(wc); if(storm)score-=3;
+  if([1,2,3,45,48,51,53,61,80].includes(wc))score+=1;
+  if(windMax>=5&&windMax<=15)score+=1; else if(windMax>22)score-=1;
+  if(score>=4)return{label:"Prime",cls:"b-prime"}; if(score>=2)return{label:"Good",cls:"b-good"};
+  if(score>=0)return{label:"Fair",cls:"b-fair"}; return{label:"Slow",cls:"b-slow"};
+}
+function renderForecast(data){
+  const el=document.getElementById("forecast"); if(!el) return;
+  let d; try{ d=data.daily; if(!d||!d.time||!d.temperature_2m_max) throw 0; }catch(e){ el.innerHTML=""; return; }
+  const days=Math.min(7,d.time.length); let rows="";
+  for(let i=0;i<days;i++){
+    const dt=new Date(d.time[i]+"T12:00");
+    const name=i===0?"Today":dt.toLocaleDateString(undefined,{weekday:"short"});
+    const [emoji]=wxCode(d.weather_code[i]);
+    const hi=Math.round(d.temperature_2m_max[i]), lo=Math.round(d.temperature_2m_min[i]);
+    const wind=Math.round(d.wind_speed_10m_max?d.wind_speed_10m_max[i]:0);
+    const b=dayBite(data,i);
+    rows+=`<div class="fc-day"><span class="fc-name">${name}</span><span class="fc-emoji">${emoji}</span>`+
+      `<span class="fc-temp">${hi}°<span class="fc-lo">${lo}°</span></span>`+
+      `<span class="fc-wind">${wind}mph</span><span class="fc-badge ${b.cls}">${b.label}</span></div>`;
+  }
+  el.innerHTML=`<div class="card fc-card"><div class="fc-title">7-day bite outlook</div>${rows}</div>`;
+}
+async function loadWeather(force){
+  const card=document.getElementById("wxCard"); if(!card) return;
+  let cached=null; try{ cached=JSON.parse(Store.get("gc_weather")||"null"); }catch(e){}
+  if(cached&&cached.data) renderWx(cached.data,true);
+  const url=`https://api.open-meteo.com/v1/forecast?latitude=${LG.lat}&longitude=${LG.lon}`+
+    `&current=temperature_2m,apparent_temperature,is_day,precipitation,weather_code,cloud_cover,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m`+
+    `&hourly=surface_pressure`+
+    `&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,wind_speed_10m_max,wind_gusts_10m_max,precipitation_probability_max`+
+    `&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York&past_days=1&forecast_days=7`;
+  try{
+    const ctrl=new AbortController(); const to=setTimeout(()=>ctrl.abort(),9000);
+    const res=await fetch(url,{signal:ctrl.signal}); clearTimeout(to);
+    if(!res.ok) throw new Error("status"); const data=await res.json();
+    if(!data.current) throw new Error("nodata");
+    renderWx(data,false);
+    try{ Store.set("gc_weather",JSON.stringify({data,at:Date.now()})); }catch(e){}
+  }catch(e){ if(!(cached&&cached.data)) wxError(); }
+}
+
 document.getElementById("footnote").textContent = Store.persistent
-  ? "Your catch log is saved on this device."
+  ? "Your catch log and photos are saved on this device."
   : "Preview mode: catches save for this session. Once installed on your phone, they'll save permanently.";
 </script>
 </body>
